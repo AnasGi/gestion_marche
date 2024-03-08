@@ -1,0 +1,186 @@
+/* App component ---------------------------------------------------- */
+#root , body , html {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.App {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width : 100%;
+}
+
+/* Login component ---------------------------------------------- */
+
+.container {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+form {
+  width: 300px;
+}
+form div{
+  margin-bottom: 20px;
+}
+
+form legend {
+  font-size: 18px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='tel'],
+input[type='date'],
+select {
+  width: 100%;
+  height: 50px;
+  border: .1px solid rgb(181, 181, 181);
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 0px 10px;
+}
+
+input::placeholder{
+  font-size: 15px;
+  font-weight: 500;
+}
+
+select{
+  border: 1px solid;
+}
+
+.container span {
+  color: #ff0000;
+  font-size: 15px;
+  width: 150px;
+  padding: 10px;
+}
+
+.btnCont{
+  width: max-content;
+}
+.btnCont > button{
+  width: 100%;
+}
+
+.btnCont > button , .btnAddMarche {
+  background-color: #007bff;
+  border: none ;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.btnCont > button:hover , .btnAddMarche:hover {
+  background-color: #0056b3;
+}
+
+/* Carte de marche ---------------------------------------------- */
+
+.MarcheCont{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.MarcheCont>div:first-child{
+  width: 30%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.MarcheCont h1{
+  border: 1px solid;
+  border-radius: 10%;
+  width: fit-content;
+  padding: 10px;
+}
+
+.MarcheCont>div:last-child{
+  width: 60%;
+}
+
+.MarcheCont>div:last-child>div:first-child{
+  font-weight: 600;
+}
+
+.MarcheCont>div:last-child>div:nth-child(2){
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.MarcheCont>div:last-child>div:nth-child(2) p{
+  margin: 0;
+}
+
+.MarcheCont>div:last-child>div:last-child{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.MarcheCont button {
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.stop{
+  background-color: #d1632c;
+}
+.stop:hover{
+  background-color: #af5021;
+}
+
+.reprise{
+  background-color: #1eb132;
+}
+.reprise:hover{
+  background-color: #169126;
+}
+
+
+/* AddMarche component ------------------------------- */
+
+.AddCont{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.AddCont input {
+  width: 200px;
+}
+
+.title{
+  margin: 0;
+}
+
+.btnAddMarket{
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.AddContainer>form{
+  width: 100%;
+}

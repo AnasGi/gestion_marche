@@ -1,0 +1,112 @@
+{
+  "users": [
+    {
+      "id": "Admin",
+      "username": "Admin",
+      "password": "1234",
+      "telephone": "",
+      "marches": [
+        {
+          "theme": "Infrastructure et construction",
+          "soustheme": [
+            "Construction de routes et autoroutes",
+            "Construction de ponts",
+            "Construction de bâtiments gouvernementaux",
+            "Travaux de génie civil",
+            "Aménagement urbain"
+          ]
+        },
+        {
+          "theme": "Services professionnels",
+          "soustheme": [
+            "Consultation en ingénierie",
+            "Consultation en architecture",
+            "Services juridiques",
+            "Services de gestion de projet",
+            "Consultation en informatique et technologie"
+          ]
+        },
+        {
+          "theme": "Fournitures et équipements",
+          "soustheme": [
+            "Matériel médical et pharmaceutique",
+            "Matériaux de construction",
+            "Équipements informatiques et logiciels",
+            "Mobilier de bureau",
+            "Fournitures de bureau et consommables"
+          ]
+        },
+        {
+          "theme": "Transport et logistique",
+          "soustheme": [
+            "Services de transport en commun",
+            "Gestion des ports et des terminaux maritimes",
+            "Gestion des aéroports et services connexes",
+            "Logistique et gestion des chaînes d'approvisionnement",
+            "Services de transport de marchandises"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "username": "user1",
+      "password": "1111",
+      "telephone": "",
+      "marches": [
+        {
+          "num": "275/bg/2024",
+          "objet": "ihadbj ezkacjba acvcjh zdvefvf efvefvefz  vef vze v zef vevevef",
+          "lieu": "Wilaya, Daoudiat, Marrakech",
+          "dateDebut": "2024-03-15",
+          "dateFin": "2024-05-15",
+          "theme": "kjbasc",
+          "soustheme": "zdacazdcva zdvaczdvzd zadvzdvzdvzd"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "username": "user2",
+      "password": "azerty",
+      "telephone": "",
+      "marches": [
+        {
+          "num": "987/bg/2024",
+          "objet": "kjbasjkbsaczchjcz jszczhas",
+          "lieu": "Wilaya, Daoudiat, Marrakech",
+          "dateDebut": "2024-04-01",
+          "dateFin": "2024-07-01",
+          "theme": "sxczaxaz",
+          "soustheme": "zacxz zaczc zac zaczza"
+        },
+        {
+          "num": "3242/bg/2024",
+          "objet": "aaaa",
+          "lieu": "kech",
+          "dateDebut": "2024-04-24",
+          "dateFin": "2024-05-23",
+          "theme": "Services professionnels",
+          "soustheme": "Services juridiques"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "username": "user3",
+      "password": "0000",
+      "telephone": "",
+      "marches": [
+        {
+          "num": "435/bg/2024",
+          "objet": "kjbasjkbsaczchjcz jszczhas",
+          "lieu": "Wilaya, Daoudiat, Marrakech",
+          "dateDebut": "2024-04-01",
+          "dateFin": "2024-07-01",
+          "theme": "sxczaxaz",
+          "soustheme": "zacxz zaczc zac zaczza"
+        }
+      ]
+    }
+  ]
+}
