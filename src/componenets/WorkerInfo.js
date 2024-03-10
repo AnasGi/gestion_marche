@@ -91,6 +91,12 @@ export default function WorkerInfo() {
                                         <legend>Delai</legend>
                                         <p>{(new Date(marche.dateFin) - new Date(marche.dateDebut)) / (1000 * 3600 * 24)} jours</p>
                                     </fieldset>
+                                </div>     
+                                <div>
+                                    <fieldset>
+                                        <legend>Ordre d'arret</legend>
+                                        {marche.orderArret ? <p>Oui</p> : <p>Nom</p>}
+                                    </fieldset>
                                 </div>            
                             </div>
                         )

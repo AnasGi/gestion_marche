@@ -11,6 +11,10 @@
 #root , body , html {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(241, 241, 241);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 10px;
 }
 .App {
   display: grid;
@@ -128,24 +132,24 @@ select{
   padding: 10px;
 }
 
-.MarcheCont>div:last-child{
+.MarcheCont>div:nth-child(2){
   width: 60%;
 }
 
-.MarcheCont>div:last-child>div:first-child{
+.MarcheCont>div:nth-child(2)>div:first-child{
   font-weight: 600;
 }
 
-.MarcheCont>div:last-child>div:nth-child(2){
+.MarcheCont>div:nth-child(2)>div:nth-child(2){
   display: flex;
   justify-content: space-between;
 }
 
-.MarcheCont>div:last-child>div:nth-child(2) p{
+.MarcheCont>div:nth-child(2)>div:nth-child(2) p{
   margin: 0;
 }
 
-.MarcheCont>div:last-child>div:last-child{
+.MarcheCont>div:nth-child(2)>div:last-child{
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
@@ -172,6 +176,31 @@ select{
 }
 .reprise:hover{
   background-color: #169126;
+}
+
+#plusInfos{
+  font-size : 15px;
+  font-weight:400 ;
+  cursor : pointer;
+  display: flex;
+  align-items: center;
+  width: 150px;
+}
+
+#plusInfos>img{
+  width: 10px;
+  height: 10px;
+  visibility: hidden;
+  transition: .3s;
+}
+
+#plusInfos:hover{
+  text-decoration: underline;
+  color: #0056b3;
+}
+#plusInfos:hover>img{
+  transform: translateX(10px);
+  visibility: visible;
 }
 
 
@@ -205,9 +234,58 @@ select{
 
 
 /* Header & Footer -------------------------- */
-header , footer {
-  height: 100px;
+header {
+  height: 70px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: white;
+  box-shadow: 1px 1px 10px black;
+  position: sticky;
+  top: 0;
+  user-select: none;
 }
+
+header img {
+  width: 100px;
+  height: 80px;
+}
+header div:first-child{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+header details{
+  cursor: pointer;
+  height: 20px;
+}
+
+header details>summary{
+  font-weight: 600;
+}
+
+header details>div>a{
+  display: block;
+  padding: 5px 15px;
+  text-decoration: none;
+  background-color: rgb(218, 218, 218);
+  margin-top: 10px;
+  border-radius: 5px;
+  text-align: center;
+  transition: .3s;
+  color: black;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+header details>div>a:hover{
+  background-color: rgb(238, 180, 180);
+}
+
 
 
 
@@ -269,8 +347,7 @@ header , footer {
   align-items: center;
   height: 100px;
   width: 95%;
-  border: 1px solid;
-  border-radius: 5px;
+  border-bottom: 2px solid;
   padding: 10px 15px;
 }
 
@@ -286,6 +363,7 @@ header , footer {
   text-align: center;
   font-size: 16px;
   word-wrap: break-word;
+  text-transform: capitalize;
 }
 
 ::-webkit-scrollbar {

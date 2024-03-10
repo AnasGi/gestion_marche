@@ -23,6 +23,16 @@ export default function Todo() {
     .then(res=>setExistingData(res.data))
   },[id])
 
+  useEffect(()=>{
+    const disapearMsg = setTimeout(() => {
+        setErrortask('')
+      }, 3000); 
+      
+    return () => {
+      clearTimeout(disapearMsg)
+    }
+  })
+
   let taskId = Math.random(Math.floor(10000000000 , 99999999999999));
   let date = moment()
   let taskDate = date.format('LLL')
@@ -58,6 +68,7 @@ export default function Todo() {
 
       setIsClick(prev=>!prev)
       setIsModified(false)
+      setTask('')
 
       axios.put(`http://localhost:3001/users/${id}`, existingData)
       .then((res)=>setErrortask('Tache a était modifier'))
@@ -101,7 +112,7 @@ export default function Todo() {
                         <button className="mod" onClick={()=>{setIsModified(true) ;setTask(task) ;setTid(taskId)}}><img src={edit} alt="modifier"/></button>
                       </div>
                       <div>
-                        <button className="dlt" onClick={(e)=>handleSupprimer(e,taskId)}><img src={dlt} alt="supprimer"/></button>
+                        <button className="dlt" onClick={(e)=>handleSupprimer(e,taskId)} disabled={isModified ? true : false}><img src={dlt} alt="supprimer"/></button>
                       </div>
                       <div>{taskDate}</div> 
                   </div>

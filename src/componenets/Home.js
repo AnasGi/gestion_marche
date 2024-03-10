@@ -2,8 +2,6 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import WorkerInterface from './WorkerInterface'
 import AdminInterface from './AdminInterface'
-// import UseData from '../hooks/UserHook'
-import Footer from './Footer'
 import Header from './Header'
 
 export default function Home() {
@@ -11,9 +9,8 @@ export default function Home() {
 
   return (
     <>
-      <Header/>
+      <Header isAdmin={id}/>
       {id==="Admin" ? <AdminInterface /> : <WorkerInterface id={id} />}
-      <Footer/>
     </>
   )
 }

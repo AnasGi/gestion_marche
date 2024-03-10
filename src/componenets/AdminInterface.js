@@ -3,10 +3,10 @@ import CarteMarche from './CarteMarche'
 import { useNavigate } from 'react-router-dom'
 import UseData from '../hooks/UserHook'
 import userlogo from '../imgs/person.png'
+import more from '../imgs/more.png'
 
 export default function AdminInterface() {
 
-  
   const navigate = useNavigate()
 
   const dt = UseData()
@@ -18,14 +18,17 @@ export default function AdminInterface() {
   return (
     dt!==undefined && dt.filter(dt=>dt.id !== 'Admin').map(dt=>
         <fieldset key={dt.id} className='carteField'>
-          <legend style={{cursor : 'pointer'}}>
-            <h1 onClick={()=>navigate(`/WorkerInfo/${dt.id}/${generateKey}`)}>
+          <legend id={dt.id}>
+            <h1 style={{textTransform : 'capitalize'}}>
               <img style={{width : '30px' , height : '30px', paddingRight : '10px'}} src={userlogo} alt='user logo'/>
               {dt.username}
+              <p id='plusInfos' onClick={()=>navigate(`/WorkerInfo/${dt.id}/${generateKey}`)}>Plus d'information
+              <img src={more} alt='show more'/>
+              </p>
             </h1>
           </legend>
           <hr style={{width : '100%'}}/>
-          <CarteMarche users={dt} marche={dt.marches} />
+          <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
         </fieldset>
     )
   )

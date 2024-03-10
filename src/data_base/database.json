@@ -61,7 +61,8 @@
           "dateDebut": "2024-03-15",
           "dateFin": "2024-05-15",
           "theme": "kjbasc",
-          "soustheme": "zdacazdcva zdvaczdvzd zadvzdvzdvzd"
+          "soustheme": "zdacazdcva zdvaczdvzd zadvzdvzdvzd",
+          "orderArret": true
         }
       ],
       "taches": []
@@ -79,7 +80,8 @@
           "dateDebut": "2024-04-01",
           "dateFin": "2024-07-01",
           "theme": "sxczaxaz",
-          "soustheme": "zacxz zaczc zac zaczza"
+          "soustheme": "zacxz zaczc zac zaczza",
+          "orderArret": false
         },
         {
           "num": "3242/bg/2024",
@@ -88,19 +90,48 @@
           "dateDebut": "2024-04-24",
           "dateFin": "2024-05-23",
           "theme": "Services professionnels",
+          "soustheme": "Services juridiques",
+          "orderArret": true
+        },
+        {
+          "num": "6567/bg/2025",
+          "objet": "menage salle",
+          "lieu": "marrakech, wilaya",
+          "dateDebut": "2024-03-20",
+          "dateFin": "2024-04-24",
+          "theme": "Fournitures et équipements",
+          "soustheme": "Équipements informatiques et logiciels",
+          "orderArret": true
+        },
+        {
+          "num": "2890/bg/2024",
+          "objet": "test time",
+          "lieu": "kech",
+          "dateDebut": "2024-03-10",
+          "dateFin": "2024-04-10",
+          "theme": "Infrastructure et construction",
+          "soustheme": "Construction de routes et autoroutes"
+        },
+        {
+          "num": "9090/bg/2024",
+          "objet": "delai test",
+          "lieu": "jadida",
+          "dateDebut": "2024-03-10",
+          "dateFin": "2024-03-11",
+          "theme": "Services professionnels",
           "soustheme": "Services juridiques"
         }
       ],
       "taches": [
         {
-          "taskId": 0.7428925844788103,
-          "task": "do projects",
-          "taskDate": "March 9, 2024 9:29 PM"
+          "taskId": 0.1826027642563297,
+          "task": "imprimer des bilans",
+          "taskDate": "March 10, 2024 6:16 PM"
         },
         {
-          "taskId": 0.137171142397575,
-          "task": "kkkkkkk",
-          "taskDate": "March 9, 2024 9:29 PM"
+          "taskId": 0.26711675710937977,
+          "task": "do homework",
+          "taskDate": "March 10, 2024 6:23 PM"
         }
       ]
     },
@@ -117,7 +148,8 @@
           "dateDebut": "2024-04-01",
           "dateFin": "2024-07-01",
           "theme": "sxczaxaz",
-          "soustheme": "zacxz zaczc zac zaczza"
+          "soustheme": "zacxz zaczc zac zaczza",
+          "orderArret": false
         }
       ],
       "taches": []

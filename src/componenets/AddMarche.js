@@ -56,11 +56,23 @@ export default function AddMarche() {
                 return true; // If at least one element is empty, return true
               }
             }
+            
             return false; // If no empty elements found, return false
+        }
+
+        function IsNumMarcheExist(){
+            let d = ExistingData.marches
+            if(d.find(mr=>mr.num === MarcheInfo.num) !== undefined){
+                return true
+            }
+            return false
         }
 
         if(IsEmpty()){
             setErrorMsg('Les champs * sont obligatoires !')
+        }
+        else if(IsNumMarcheExist()){
+            setErrorMsg('Ce numero du marché exist déja !')
         }
         else{
             setErrorMsg('')
@@ -72,6 +84,8 @@ export default function AddMarche() {
         }
 
     }
+
+    
 
   return (
     <div className='AddContainer'>

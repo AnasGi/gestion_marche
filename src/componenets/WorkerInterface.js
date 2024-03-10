@@ -17,7 +17,7 @@ export default function WorkerInterface(props) {
   return (
         dt!==undefined && UserData.map(dt=>
         <fieldset key={dt.id} className='carteField'>
-          <CarteMarche users={dt} marche={dt.marches} />
+          <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
           <div className='btnAddMarket'>
             <button className='btnAddMarche' onClick={()=>navigate(`/AddMarche/${UserData[0].id}/${generateKey}`)}>Ajouter un marché</button>
           </div>
