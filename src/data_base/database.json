@@ -63,13 +63,14 @@
           "theme": "kjbasc",
           "soustheme": "zdacazdcva zdvaczdvzd zadvzdvzdvzd"
         }
-      ]
+      ],
+      "taches": []
     },
     {
       "id": "2",
       "username": "user2",
       "password": "azerty",
-      "telephone": "",
+      "telephone": "0645766543",
       "marches": [
         {
           "num": "987/bg/2024",
@@ -89,6 +90,18 @@
           "theme": "Services professionnels",
           "soustheme": "Services juridiques"
         }
+      ],
+      "taches": [
+        {
+          "taskId": 0.7428925844788103,
+          "task": "do projects",
+          "taskDate": "March 9, 2024 9:29 PM"
+        },
+        {
+          "taskId": 0.137171142397575,
+          "task": "kkkkkkk",
+          "taskDate": "March 9, 2024 9:29 PM"
+        }
       ]
     },
     {
@@ -106,7 +119,8 @@
           "theme": "sxczaxaz",
           "soustheme": "zacxz zaczc zac zaczza"
         }
-      ]
+      ],
+      "taches": []
     }
   ]
 }

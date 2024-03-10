@@ -2,18 +2,18 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import WorkerInterface from './WorkerInterface'
 import AdminInterface from './AdminInterface'
-import UseData from '../hooks/UserHook'
+// import UseData from '../hooks/UserHook'
+import Footer from './Footer'
+import Header from './Header'
 
 export default function Home() {
-    const {id} = useParams()
-
-    const Data = UseData()
-
-    const UserData = Data.filter(dt=>dt.id === id)
-
-    const UsersData = Data.filter(dt=>dt.id !== "Admin")
+    const {id} = useParams()    
 
   return (
-    id==="Admin" ? <AdminInterface data={UsersData} /> : <WorkerInterface data={UserData} />
+    <>
+      <Header/>
+      {id==="Admin" ? <AdminInterface /> : <WorkerInterface id={id} />}
+      <Footer/>
+    </>
   )
 }

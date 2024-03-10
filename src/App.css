@@ -1,3 +1,12 @@
+/* Animations ----------------------------------------------*/
+@keyframes msgAnim {
+  from{
+    transform: translateY(0px)
+  }
+  to{
+    transform: translateY(20px);
+  }
+}
 /* App component ---------------------------------------------------- */
 #root , body , html {
   height: 100%;
@@ -8,6 +17,7 @@
   place-items: center;
   height: 100%;
   width : 100%;
+  gap: 20px;
 }
 
 /* Login component ---------------------------------------------- */
@@ -84,14 +94,23 @@ select{
 
 /* Carte de marche ---------------------------------------------- */
 
+.carteField{
+  width : 80% ; 
+  display:flex ; 
+  justify-content : center ; 
+  flex-direction : column ;
+  gap : 20px ;
+  border: none;
+}
+
+
 .MarcheCont{
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 95%;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 20px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -120,7 +139,6 @@ select{
 .MarcheCont>div:last-child>div:nth-child(2){
   display: flex;
   justify-content: space-between;
-  width: 80%;
 }
 
 .MarcheCont>div:last-child>div:nth-child(2) p{
@@ -131,7 +149,6 @@ select{
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
-  width: 80%;
 }
 
 .MarcheCont button {
@@ -176,11 +193,214 @@ select{
 }
 
 .btnAddMarket{
-  width: 80%;
+  width:95%;
   display: flex;
   justify-content: flex-end;
+  padding-left: 20px ;
 }
 
 .AddContainer>form{
   width: 100%;
+}
+
+
+/* Header & Footer -------------------------- */
+header , footer {
+  height: 100px;
+}
+
+
+
+/* Todo component --------------------------------- */
+.todoCont {
+  height: 100%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: auto;
+}
+
+.todoCont > div{
+  overflow-y: scroll;
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.msg {
+  transform: translateY(20px);
+  animation: msgAnim .3s linear;
+}
+
+.todoCont > form{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+
+.todoCont > form >div{
+  margin: 0
+}
+
+.todoCont > form >div:first-child{
+  width: 60%;
+}
+
+/* .todoCont > form >div:last-child{
+  height: 50px;
+} */
+
+
+.todoCont > form input{
+  padding: 0 10px;
+  background-color: transparent;
+  border-radius: 15px;
+}
+
+.taskCont{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  width: 95%;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+
+.taskCont >form{
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.taskCont >form>p{
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(191, 175, 175, 0.49);
+  border-radius: 10px;
+}
+
+.mod , .dlt , .confirm , .showMarkets{
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  transition: .3s;
+  padding:8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mod:hover , .dlt:hover , .confirm:hover , .showMarkets:hover{
+  cursor: pointer;
+}
+.mod:hover{
+  background-color: #007bff;
+}
+.dlt:hover{
+  background-color: rgb(213, 74, 74);
+}
+.confirm:hover{
+  background-color: lightgreen;
+}
+.showMarkets:hover{
+  background-color: #007bff;
+}
+
+.taskCont img , .showMarkets img{
+  width: 30px;
+  height: 30px;
+}
+
+.confirm img {
+  width: 40px;
+  height: 40px;
+}
+
+
+
+
+/* WorkerInfo ---------------------------------------------- */
+
+.InfoWorkerCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 80%;
+}
+
+.userSpace img {
+  width: 200px;
+  height: 200px;
+}
+
+.ActivityCont {
+  width: 80%;
+}
+.marcheHeader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.marcheHeader h3{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 90%;
+
+}
+
+.stats {
+  border-radius: 50%;
+  padding: 5px 10px;
+  background-color: rgb(219, 215, 215);
+  font-weight: 500;
+  font-size: small;
+  color: rgb(109, 109, 109);
+}
+
+.marcheHeader hr{
+  width: 80%;
+  background-color: black;
+}
+
+.marcheHeader span{
+  width: 20%;
+}
+
+.UserActs {
+  height: 0px;
+  overflow: hidden;
+  transition: .5s;
+}
+
+.userMarket{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userMarket>div{
+  width: 30%;
 }

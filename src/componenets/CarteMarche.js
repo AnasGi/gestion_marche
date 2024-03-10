@@ -1,13 +1,11 @@
 import React from 'react'
 
-export default function CarteMarche(props) {
-  return (
-    props.data !== undefined && props.data.map(
-      dt=>dt.marches.map(marche=>
-        <div key={props.data.id} className='MarcheCont'>
+export default function CarteMarche({marche , users}) {
 
+  return (
+    marche.map(marche=>
+        <div key={marche.num} className='MarcheCont'>
           <div>
-            <h1>{dt.username}</h1>
             <p>{marche.num}</p>    
             <hr/>
             <p>{marche.objet}</p>    
@@ -47,8 +45,6 @@ export default function CarteMarche(props) {
           </div>
 
         </div>
-      )
     )
-    
-  )
+      )
 }
