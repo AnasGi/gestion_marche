@@ -5,7 +5,7 @@ import Home from './componenets/Home';
 import AddMarche from './componenets/AddMarche';
 import Todo from './componenets/Todo';
 import WorkerInfo from './componenets/WorkerInfo';
-
+import SignUp  from './componenets/SignUp'
 function App() {
   return (
     <div className="App">
@@ -16,6 +16,7 @@ function App() {
         <Route path='/WorkerInfo/:worker/:securityKey' element={<WorkerInfo />} />
         <Route path='/AddMarche/:id/:securityKey' element={<AddMarche />} />
         <Route path='/AddMarche/:id/:securityKey/Todo' element={<Todo/>} />
+        <Route path='/signUp' element={<SignUp/>} />
       </Routes>
     </div>
   );

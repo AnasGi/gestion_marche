@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import UseData from '../hooks/UserHook'
 import {  Link,useNavigate } from 'react-router-dom'
+import ErrorLogo from '../imgs/mark.png'
 
 import password_icon from '../Assets/password.png';
 import user_icon from '../Assets/person.png';
@@ -29,13 +30,13 @@ export default function LoginT() {
             setUsernameError("Veuillez saisir le nom d'utilisateur")
             setPasswordError("")
         }
+        else if(Data.find(dt=>dt.username === infos.username) === undefined){
+            setUsernameError("Nom d'utilisateur n'existe pas")
+            setPasswordError("")
+        }
         else if(infos.password === ""){
             setPasswordError("Veuillez saisir le mot de passe")
             setUsernameError("")
-        }
-        else if(Data.find(dt=>dt.username === infos.username) === undefined){
-            setUsernameError("Votre nom d'utilisateur est incorrect")
-            setPasswordError("")
         }
         else if(Data.find(dt=>dt.password === infos.password) === undefined){
             setPasswordError("Votre mot de passe est incorrect")
@@ -52,12 +53,15 @@ export default function LoginT() {
     
   return (
     <div className='containerlogIn'>
+
+        <div>
+            <h1>Bienvenue</h1>
+        </div>
         
 <form onSubmit={e => handleLogin(e)}>
             <div className="header">
-            <div className="text">Log In</div>
-            <div className="underline"></div>
-          </div>
+                <div className="underline"></div>
+            </div>
                 <div className='inputs'>
                     <div className='input'>
                         <img src={user_icon} alt="" />
@@ -65,7 +69,11 @@ export default function LoginT() {
                   
                       
                     </div>
-                  <div className='error'>  <span>{usernameError}</span></div>
+                    {usernameError !== "" && 
+                        <span className='error'>
+                        <img style={{width : "20px" , height : "20px"}} src={ErrorLogo} alt='error'/>  <span>{usernameError}</span>
+                        </span>
+                    }
                   
                     <div className='input'>
                         <img src={password_icon} alt="" />
@@ -81,12 +89,14 @@ export default function LoginT() {
                         
                       
                         </div>
-                        <div className='error'>  <span>{passwordError}</span></div>
+                        {passwordError !== "" && 
+                            <span className='error'>
+                            <img style={{width : "20px" , height : "20px"}} src={ErrorLogo} alt='error'/>  <span>{passwordError}</span>
+                            </span>
+                        }
                 <div className='btnCont'>
                     <button className='submit'>Authentifier</button>  
-                    <Link to={"/signUp"}>
-                Crée Un Compte
-              </Link>
+                    <Link to={"/signUp"}>Créer un compte</Link>
                 </div>
                 </div>
                 </form>

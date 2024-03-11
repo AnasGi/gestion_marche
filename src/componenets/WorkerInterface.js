@@ -16,8 +16,15 @@ export default function WorkerInterface(props) {
 
   return (
         dt!==undefined && UserData.map(dt=>
-        <fieldset key={dt.id} className='carteField'>
-          <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
+          <fieldset key={dt.id} className='carteField'>
+          {
+            dt.marches.length !== 0 ?
+            <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
+            :
+            <div style={{marginBottom : '100px'}}>
+              <p style={{textAlign : 'center'}}>Pas de marches</p>
+            </div>
+          }
           <div className='btnAddMarket'>
             <button className='btnAddMarche' onClick={()=>navigate(`/AddMarche/${UserData[0].id}/${generateKey}`)}>Ajouter un marché</button>
           </div>
@@ -25,6 +32,8 @@ export default function WorkerInterface(props) {
             <button className='btnAddMarche' onClick={()=>navigate(`/AddMarche/${UserData[0].id}/${generateKey}/Todo`)}>Votre liste To do</button>
           </div>
         </fieldset>
+        
+        
         )
   )
 }

@@ -28,7 +28,14 @@ export default function AdminInterface() {
             </h1>
           </legend>
           <hr style={{width : '100%'}}/>
-          <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
+          {
+            dt.marches.length !== 0 ?
+            <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
+            :
+            <div style={{marginBottom : '100px'}}>
+              <p style={{textAlign : 'center'}}>Pas de marches</p>
+            </div>
+          }
         </fieldset>
     )
   )

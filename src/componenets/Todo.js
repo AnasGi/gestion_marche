@@ -27,7 +27,7 @@ export default function Todo() {
     const disapearMsg = setTimeout(() => {
         setErrortask('')
       }, 3000); 
-      
+
     return () => {
       clearTimeout(disapearMsg)
     }
@@ -59,20 +59,26 @@ export default function Todo() {
 
   const handleUpdate = (e , tId) =>{
     e.preventDefault()
-    
+
+    if(task ===""){
+      setErrortask('La tache ne peut pas etre vide')
+    }
+    else{
       let elementToDlt = existingData.taches.find(ext=>ext.taskId === tId)
-
+  
       let taskIndex = existingData.taches.indexOf(elementToDlt)
-
+  
       existingData.taches.splice(taskIndex , 1 , {taskId ,task , taskDate})
-
+  
       setIsClick(prev=>!prev)
       setIsModified(false)
       setTask('')
-
+  
       axios.put(`http://localhost:3001/users/${id}`, existingData)
       .then((res)=>setErrortask('Tache a était modifier'))
       .catch((res)=>setErrortask('Un probléme est survenu lors de la modification de la tache'))
+    }
+    
 
   }
 
