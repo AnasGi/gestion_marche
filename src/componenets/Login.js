@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import UseData from '../hooks/UserHook'
-import { useNavigate } from 'react-router-dom'
+import {  Link,useNavigate } from 'react-router-dom'
 
-export default function Login() {
+import password_icon from '../Assets/password.png';
+import user_icon from '../Assets/person.png';
+export default function LoginT() {
     const [infos , setInfos] = useState({username : "" , password : ""})
     const [usernameError , setUsernameError] = useState('')
     const [passwordError , setPasswordError] = useState('')
+    const [showPassword, setShowPassword] = useState(false); 
     const Data = UseData()
     const navigate = useNavigate()
 
@@ -15,7 +18,9 @@ export default function Login() {
             [e.target.name] : e.target.value
         })
     }
-
+    function VisibilityPass() {
+      setShowPassword(!showPassword);
+  }
     function handleLogin(e){
 
         e.preventDefault()
@@ -46,27 +51,45 @@ export default function Login() {
     }
     
   return (
-    <div className='container'>
-        <div>
-            <h2 style={{textAlign : "center"}}>Bienvenue</h2>
+    <div className='containerlogIn'>
+        
+<form onSubmit={e => handleLogin(e)}>
+            <div className="header">
+            <div className="text">Log In</div>
+            <div className="underline"></div>
+          </div>
+                <div className='inputs'>
+                    <div className='input'>
+                        <img src={user_icon} alt="" />
+                    <input type='text' name='username' onChange={e => handleInfos(e)} placeholder="Entrer votre nom d'utilisateur" />
+                  
+                      
+                    </div>
+                  <div className='error'>  <span>{usernameError}</span></div>
+                  
+                    <div className='input'>
+                        <img src={password_icon} alt="" />
+                            <div style={{ position: 'relative' }}>
+                                <input type={showPassword ? 'text' : 'password'} name='password' onChange={e => handleInfos(e)} placeholder="Entrer votre mot de passe" />
+                                <i
+                                    className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'} password-icon`}
+                                    onClick={VisibilityPass}
+                                    style={{ position: 'absolute', left: '340px', top: '6px', cursor: 'pointer' }}
+                                ></i>
+                            </div>
+                          
+                        
+                      
+                        </div>
+                        <div className='error'>  <span>{passwordError}</span></div>
+                <div className='btnCont'>
+                    <button className='submit'>Authentifier</button>  
+                    <Link to={"/signUp"}>
+                Crée Un Compte
+              </Link>
+                </div>
+                </div>
+                </form>
         </div>
-        <form onSubmit={e=>handleLogin(e)}>
-            <div>
-                <div>
-                    <input type='text' name='username' onChange={e=>handleInfos(e)} placeholder="Entrer votre nom d'utilisateur" />
-                    <span>{usernameError}</span>
-                </div>
-
-                <div>
-                    <input type='password' name='password' onChange={e=>handleInfos(e)} placeholder="Entrer votre mot de passe" />
-                    <span>{passwordError}</span>
-                </div>
-            </div>
-
-            <div className='btnCont'>
-                <button>Authentifier</button>
-            </div>
-        </form>
-    </div>
   )
 }
