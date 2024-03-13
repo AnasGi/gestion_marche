@@ -52,9 +52,11 @@ export default function WorkerInfo() {
           UserData.map((ud) => (
             <div className="userSpace">
               <img src={userlogo} alt="user logo" />
-              <h1 style={{ textTransform: "capitalize" }}>{ud.username}</h1>
-              <h4>Tél : {ud.telephone}</h4>
-              <h4>Email : {ud.email}</h4>
+              <div style={{marginLeft : "10px"}}>
+                <h1 style={{ textTransform: "capitalize" }}>{ud.username}</h1>
+                <h4>Tél : {ud.telephone}</h4>
+                <h4>Email : {ud.email}</h4>
+              </div>
             </div>
           ))}
       </div>
@@ -131,13 +133,13 @@ export default function WorkerInfo() {
                   <div
                     key={data.id}
                     className="userMarket"
-                    style={{ textAlign: "center" }}
+                    
                   >
-                    <div>
-                      <p>{tache.task}</p>
+                    <div style={{ width : "100%" , display : "flex" , justifyContent : 'space-between'}}>
+                      <p style={{wordBreak : 'break-word' , width : "70%"}}>{tache.task}</p>
                     </div>
 
-                    <div>
+                    <div style={{width : "20%"}}>
                       <p>{tache.taskDate}</p>
                     </div>
                   </div>

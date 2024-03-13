@@ -293,6 +293,30 @@ header div:first-child {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  height: 100%;
+}
+
+header div:first-child:hover >img {
+  border: 1px solid red;
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.ModPassForm input{
+  border-radius: 6px;
+  border: 1px gray solid;
+  padding: 7px;
+}
+
+.ModPassForm button{
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(to right ,#aa076b,#61045f);
 }
 
 header details {
@@ -469,10 +493,6 @@ header details > div > a:hover {
   width: 80%;
 }
 
-.InfoWorkerCont > div:first-child {
-  width: 40%;
-}
-
 .userSpace img {
   width: 200px;
   height: 200px;
@@ -612,7 +632,7 @@ header details > div > a:hover {
   border-radius: 6px;
   background: linear-gradient(to right ,#aa076b,#61045f);
 }
-.btnContAdd button:hover{
+.btnContAdd button:hover , .ModPassForm button:hover{
   background: linear-gradient(to right ,#61045f,#aa076b);
 }
 

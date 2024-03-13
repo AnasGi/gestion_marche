@@ -1,16 +1,20 @@
-import React from 'react'
-// import maroc from '../imgs/logoMaroc.png'
+import React, { useState } from 'react'
 import UseData from '../hooks/UserHook'
 import { useNavigate } from 'react-router-dom'
 import userlogo from '../imgs/person.png'
 import clock from '../imgs/clock.png'
 import moment from 'moment'
+import AdminLogo from '../imgs/Admin.png'
+import Modpass from './Modpass'
+
 
 export default function Header({isAdmin}) {
 
   const data = UseData()
 
   const navigate = useNavigate()
+
+  const [isMod , setIsMod] = useState(false)
 
   let marchesNumber = 0
   data.filter(dt=>dt.id !== 'Admin').map(data=>marchesNumber+=data.marches.length)
@@ -20,14 +24,17 @@ export default function Header({isAdmin}) {
 
   const nbreUsers = data.filter(dt=>dt.id !== 'Admin').length
 
+
+
   return (
     <header>
-      {/* <div>
-        <div>
-          <img src={maroc} alt='logo maroc'/>
+      {
+        isAdmin === "Admin" &&
+        <div className='AdminIcon'>
+          <img style={{ width : "50px" , height : "50px" }}  onClick={()=>setIsMod(prev=>!prev)} src={AdminLogo} alt='Admin logo' title='Clicker pour modifier mot de passe'/>
+          {isMod && <Modpass/>}
         </div>
-        
-      </div> */}
+      }
       <div style={{display : 'flex' , alignItems : 'center' , justifyContent : 'space-evenly'}}>
         {
             (isAdmin === "Admin" && data !== undefined) ?
