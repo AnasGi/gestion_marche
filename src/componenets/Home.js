@@ -8,7 +8,7 @@ export default function Home() {
     const {id} = useParams()    
 
   return (
-    <div style={{display : 'flex' , flexDirection : 'column' , justifyContent : 'space-between' , alignItems : 'center' , width : "100%"} }>
+    <div className='homeCont'>
       <Header isAdmin={id}/>
       {id==="Admin" ? <AdminInterface /> : <WorkerInterface id={id} />}
     </div>

@@ -1,16 +1,35 @@
 /* Animations ----------------------------------------------*/
 @keyframes msgAnim {
-  from{
-    transform: translateY(0px)
+  from {
+    transform: translateY(0px);
   }
-  to{
+  to {
     transform: translateY(20px);
   }
 }
+@keyframes ErrorAnim {
+  0% {
+    transform: translateX(-10px);
+  }
+  50%{
+    transform: translateX(10px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+
+/* Buttons ------------------------ */
+button, input[type= 'date'] , select{
+  cursor: pointer;
+}
+
 /* App component ---------------------------------------------------- */
-#root , body , html {
+#root,
+body,
+html {
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: rgb(241, 241, 241);
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -20,19 +39,19 @@
   display: grid;
   place-items: center;
   height: 100%;
-  width : 100%;
+  width: 100%;
   gap: 20px;
 }
 
 /* Sign Up component ---------------------------------------------- */
-.header{
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 9px;
   width: 100%;
 }
-.error{
+.error {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -40,26 +59,25 @@
   color: #d1632c;
   padding: 0;
 }
-.text{
+.text {
   color: #3c009d;
   font-size: 48px;
   font-weight: 700;
 }
-.underline{
+.underline {
   width: 61px;
   height: 6px;
   background-color: #007bff;
   border-radius: 9px;
   margin-bottom: 10px;
 }
-.inputs{
+.inputs {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 25px;
-  
 }
-.input{
+.input {
   display: flex;
   align-items: center;
   margin: auto;
@@ -68,28 +86,29 @@
   background-color: #eaeaea;
   border-radius: 6px;
 }
-.input img{
+.input img {
   margin: 0px 30px;
 }
-.input input{
+.input input {
   width: 100%;
-  background: transparent ;
+  background: transparent;
   border: none;
   outline: none;
   color: #797979;
   font-size: 19px;
+  height: 100%;
 }
-
 
 /* Login component ---------------------------------------------- */
 
-.btnCont{
+.btnCont {
   display: block;
   margin: 0px auto;
   text-align: center;
 }
 
-.submit, .btnAddMarche{
+.submit,
+.btnAddMarche {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,17 +124,21 @@
   margin-bottom: 15px;
 }
 
-.btnAddMarche{
+.btnAddMarche {
   margin-bottom: 0px;
 }
+.btnAddMarche:hover {
+  background-color: #0056b3;
+}
 
-.containerlogIn{
+.containerlogIn {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
 }
-.containerlogIn form,.containerSignUn form {
+.containerlogIn form,
+.containerSignUn form {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
@@ -123,21 +146,32 @@
 }
 
 
+/* Home components ----------------------------------------------- */
+
+.homeCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
 
 /* Carte de marche ---------------------------------------------- */
 
-.carteField{
-  width : 80% ; 
-  display:flex ; 
-  justify-content : center ; 
-  flex-direction : column ;
-  gap : 20px ;
-  margin-top:50px ;
+.carteField {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 50px;
+  height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
   border: none;
 }
 
-
-.MarcheCont{
+.MarcheCont {
   display: flex;
   justify-content: space-between;
   width: 95%;
@@ -148,121 +182,94 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.MarcheCont>div:first-child{
-  width: 30%;
+.MarcheCont > div:first-child {
+  width: 40%;
   font-weight: bold;
   text-align: center;
 }
 
-.MarcheCont h1{
+.MarcheCont h1 {
   border: 1px solid;
   border-radius: 10%;
   width: fit-content;
   padding: 10px;
 }
 
-.MarcheCont>div:nth-child(2){
-  width: 60%;
+.MarcheCont > div:nth-child(2) {
+  width: 50%;
 }
 
-.MarcheCont>div:nth-child(2)>div:first-child{
+.MarcheCont > div:nth-child(2) > div:first-child {
   font-weight: 600;
 }
 
-.MarcheCont>div:nth-child(2)>div:nth-child(2){
-  display: flex;
-  justify-content: space-between;
-}
-
-.MarcheCont>div:nth-child(2)>div:nth-child(2) p{
-  margin: 0;
-}
-
-.MarcheCont>div:nth-child(2)>div:last-child{
-  margin-top: 20px;
+.MarcheCont > div:nth-child(2) > div:nth-child(2) {
   display: flex;
   justify-content: space-around;
 }
 
-.MarcheCont button {
+.MarcheCont > div:nth-child(2) > div:nth-child(2) p {
+  margin: 0;
+}
+
+.orderbtnCont {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stop , .reprise {
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
   text-align: center;
 }
 
-.stop{
+.stop {
   background-color: #d1632c;
 }
-.stop:hover{
+.stop:hover {
   background-color: #af5021;
 }
 
-.reprise{
+.reprise {
   background-color: #1eb132;
 }
-.reprise:hover{
+.reprise:hover {
   background-color: #169126;
 }
 
-#plusInfos{
-  font-size : 15px;
-  font-weight:400 ;
-  cursor : pointer;
+.MarcheCont button{
+  cursor: pointer;
+}
+
+#plusInfos {
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
   display: flex;
   align-items: center;
   width: 150px;
 }
 
-#plusInfos>img{
+#plusInfos > img {
   width: 10px;
   height: 10px;
   visibility: hidden;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-#plusInfos:hover{
+#plusInfos:hover {
   text-decoration: underline;
   color: #0056b3;
 }
-#plusInfos:hover>img{
+#plusInfos:hover > img {
   transform: translateX(10px);
   visibility: visible;
 }
 
-
-/* AddMarche component ------------------------------- */
-
-.AddCont{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.AddCont input {
-  width: 200px;
-}
-
-.title{
-  margin: 0;
-}
-
-.btnAddMarket{
-  width:95%;
-  display: flex;
-  justify-content: flex-end;
-  padding-left: 20px ;
-}
-
-.AddContainer>form{
-  width: 100%;
-}
-
-
-/* Header & Footer -------------------------- */
+/* Header  -------------------------- */
 header {
   height: 70px;
   display: flex;
@@ -281,42 +288,48 @@ header img {
   width: 100px;
   height: 80px;
 }
-header div:first-child{
+header div:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
 
-header details{
+header details {
   cursor: pointer;
   height: 20px;
+  position: relative;
 }
 
-header details>summary{
+header details > summary {
   font-weight: 600;
 }
 
-header details>div>a{
+header details > div {
+  overflow: scroll;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  background-color: white;
+}
+
+header details > div > a {
   display: block;
-  padding: 5px 15px;
   text-decoration: none;
-  background-color: rgb(218, 218, 218);
-  margin-top: 10px;
-  border-radius: 5px;
-  text-align: center;
-  transition: .3s;
+  padding: 10px;
+  margin: 10px;
+  text-transform: capitalize;
+  transition: 0.2s;
   color: black;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 15px;
 }
 
-header details>div>a:hover{
-  background-color: rgb(238, 180, 180);
+header details > div > a:hover {
+  font-weight: 700;
+  text-decoration: underline;
 }
-
-
-
 
 /* Todo component --------------------------------- */
 .todoCont {
@@ -329,7 +342,7 @@ header details>div>a:hover{
   overflow: auto;
 }
 
-.todoCont > div{
+.todoCont > div {
   overflow-y: scroll;
   height: 50%;
   width: 100%;
@@ -340,10 +353,10 @@ header details>div>a:hover{
 
 .msg {
   transform: translateY(20px);
-  animation: msgAnim .3s linear;
+  animation: msgAnim 0.3s linear;
 }
 
-.todoCont > form{
+.todoCont > form {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -351,26 +364,24 @@ header details>div>a:hover{
   height: 20%;
 }
 
-.todoCont > form >div{
-  margin: 0
+.todoCont > form > div {
+  margin: 0;
 }
 
-.todoCont > form >div:first-child{
+.todoCont > form > div:first-child {
   width: 60%;
 }
 
-/* .todoCont > form >div:last-child{
-  height: 50px;
-} */
-
-
-.todoCont > form input{
+.todoCont > form input {
   padding: 0 10px;
   background-color: transparent;
   border-radius: 15px;
+  border: 1px solid rgb(135, 135, 135);
+  width: 90%;
+  height: 50px;
 }
 
-.taskCont{
+.taskCont {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -380,14 +391,13 @@ header details>div>a:hover{
   padding: 10px 15px;
 }
 
-
-.taskCont >form{
+.taskCont > form {
   display: flex;
   align-items: center;
   width: 50%;
 }
 
-.taskCont >form>p{
+.taskCont > form > p {
   width: 100%;
   text-align: center;
   font-size: 16px;
@@ -406,34 +416,39 @@ header details>div>a:hover{
   border-radius: 10px;
 }
 
-.mod , .dlt , .confirm , .showMarkets{
+.mod,
+.dlt,
+.confirm,
+.showMarkets {
   background-color: transparent;
   border: none;
   border-radius: 50%;
-  transition: .3s;
-  padding:8px;
+  transition: 0.3s;
+  padding: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.mod:hover , .dlt:hover , .confirm:hover , .showMarkets:hover{
+.mod:hover,
+.dlt:hover,
+.confirm:hover,
+.showMarkets:hover {
   cursor: pointer;
 }
-.mod:hover{
+.mod:hover,
+.showMarkets:hover {
   background-color: #007bff;
 }
-.dlt:hover{
+.dlt:hover {
   background-color: rgb(213, 74, 74);
 }
-.confirm:hover{
+.confirm:hover {
   background-color: lightgreen;
 }
-.showMarkets:hover{
-  background-color: #007bff;
-}
 
-.taskCont img , .showMarkets img{
+.taskCont img,
+.showMarkets img {
   width: 30px;
   height: 30px;
 }
@@ -443,9 +458,7 @@ header details>div>a:hover{
   height: 40px;
 }
 
-
-
-
+/* needs more css */
 /* WorkerInfo ---------------------------------------------- */
 
 .InfoWorkerCont {
@@ -456,26 +469,42 @@ header details>div>a:hover{
   width: 80%;
 }
 
+.InfoWorkerCont > div:first-child {
+  width: 40%;
+}
+
 .userSpace img {
   width: 200px;
   height: 200px;
 }
 
+.userMarket {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userMarket p {
+  margin: 0;
+  text-align: center;
+}
+
 .ActivityCont {
   width: 80%;
 }
-.marcheHeader{
+
+.marcheHeader {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
 }
-.marcheHeader h3{
+.marcheHeader h3 {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 90%;
-
 }
 
 .stats {
@@ -487,27 +516,137 @@ header details>div>a:hover{
   color: rgb(109, 109, 109);
 }
 
-.marcheHeader hr{
+.marcheHeader hr {
   width: 80%;
   background-color: black;
 }
 
-.marcheHeader span{
+.marcheHeader span {
   width: 20%;
 }
 
 .UserActs {
   height: 0px;
   overflow: hidden;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.userMarket{
+.top{
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  border-radius: 50%;
+  transition: .3s;
+}
+
+.top:hover{
+  background-color: #000000;
+}
+
+
+/* AddMarche component ------------------------------- */
+
+.AddContainer{
+  max-width: 650px;
+  padding: 25px;
+  overflow-y: hidden;
+}
+.AddContainer h2{
+  font-size: 26px;
+  font-weight: 600;
+  text-align: left;
+  color: #2f4f4f;
+  padding-bottom: 8px;
+  border-bottom: 1px solid silver;
+}
+.AddMarketError{
+  color: red;
+  text-align: center;
+  animation: ErrorAnim .1s .2s linear;
+}
+.AddCont{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  padding: 20px 0;
+}
+.input-bx{
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  padding-bottom: 15px;
+  
+}
+.input-bx:nth-child(2n){
+  justify-content: end;
+}
+.input-bx label{
+  width: 95%;
+  color: #2f4f4f;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.input-bx input,.input-bx select{
+  height: 40px;
+  width: 90%;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  
+}
+.input-bx input:is(:focus ,:valid),.input-bx select:is(:focus ,:valid){
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+.btnContAdd{
+  width: 100%;
+}
+.btnContAdd button{
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(to right ,#aa076b,#61045f);
+}
+.btnContAdd button:hover{
+  background: linear-gradient(to right ,#61045f,#aa076b);
 }
 
-.userMarket>div{
-  width: 30%;
+
+
+
+/* SignUp password strength */
+
+
+.password-strength-indicator {
+  height: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.password-strength-indicator .bar {
+  height: 100%;
+  transition: width 0.8s ease;
+}
+
+.faible { background-color: #ff6666;  } /* Orange */
+.moyen { background-color: #ffff99; } /* Jaune */
+.fort { background-color: #99ff99; } /* Vert clair */
+
+.password-strength-text {
+  font-size: 14px;    
+  color: #333;
+  text-transform: uppercase;
+}
+
+.nb {
+  color: #ff0000; 
+  font-size: 14px; 
+  margin-left: 12px;
+  user-select: none;
 }

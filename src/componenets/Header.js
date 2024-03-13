@@ -1,8 +1,10 @@
 import React from 'react'
-import maroc from '../imgs/logoMaroc.png'
+// import maroc from '../imgs/logoMaroc.png'
 import UseData from '../hooks/UserHook'
 import { useNavigate } from 'react-router-dom'
 import userlogo from '../imgs/person.png'
+import clock from '../imgs/clock.png'
+import moment from 'moment'
 
 export default function Header({isAdmin}) {
 
@@ -20,12 +22,12 @@ export default function Header({isAdmin}) {
 
   return (
     <header>
-      <div>
+      {/* <div>
         <div>
           <img src={maroc} alt='logo maroc'/>
         </div>
         
-      </div>
+      </div> */}
       <div style={{display : 'flex' , alignItems : 'center' , justifyContent : 'space-evenly'}}>
         {
             (isAdmin === "Admin" && data !== undefined) ?
@@ -33,7 +35,7 @@ export default function Header({isAdmin}) {
               <div>
                 <details>
                   <summary>Les résponsables</summary>
-                  <div style={{overflow : "scroll" , height : '300px'}}>
+                  <div>
                   {
                     data !== undefined &&
                     data.filter(dt=>dt.id !== "Admin")
@@ -67,8 +69,12 @@ export default function Header({isAdmin}) {
 
           }
       </div>
+      <p style={{padding : "10px", display : 'flex' , alignItems : 'center' , gap : '10px'}}>
+        <img src={clock} alt='horloge' style={{width : "40px" , height : "40px"}}/>
+        <span>{moment().format('LLL')}</span>
+      </p>
       <div>
-        <button className='btnAddMarche' onClick={()=>navigate('/')} style={{backgroundColor : 'red'}}>Deconnexion</button>
+        <button className='btnAddMarche' onClick={()=>navigate('/' , {replace: true})} style={{backgroundColor : 'red'}}>Deconnexion</button>
       </div>
     </header>
   )

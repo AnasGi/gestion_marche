@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import UseData from '../hooks/UserHook'
 import userlogo from '../imgs/person.png'
 import more from '../imgs/more.png'
+import SecurityKey from '../SecurityKey'
 
 export default function AdminInterface() {
 
@@ -11,7 +12,8 @@ export default function AdminInterface() {
 
   const dt = UseData()
 
-  let generateKey = Math.random(Math.floor(1000000 , 9999999))
+  const token = SecurityKey(32)
+
 
 
 
@@ -22,7 +24,7 @@ export default function AdminInterface() {
             <h1 style={{textTransform : 'capitalize'}}>
               <img style={{width : '30px' , height : '30px', paddingRight : '10px'}} src={userlogo} alt='user logo'/>
               {dt.username}
-              <p id='plusInfos' onClick={()=>navigate(`/WorkerInfo/${dt.id}/${generateKey}`)}>Plus d'information
+              <p id='plusInfos' onClick={()=>navigate(`/WorkerInfo/${dt.id}/${token}`)}>Plus d'information
               <img src={more} alt='show more'/>
               </p>
             </h1>
@@ -33,7 +35,7 @@ export default function AdminInterface() {
             <CarteMarche users={dt} id={dt.id} marche={dt.marches} />
             :
             <div style={{marginBottom : '100px'}}>
-              <p style={{textAlign : 'center'}}>Pas de marches</p>
+              <p style={{textAlign : 'center'}}>{dt.username} suit aucun marchés</p>
             </div>
           }
         </fieldset>
