@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import Swal from "sweetalert2";
 import edit from "../imgs/edit.png";
-import dlt from "../imgs/trash.png";
+import dlt from "../imgs/delete.png";
 import ok from "../imgs/check.png";
+import add from "../imgs/addTask.png";
 
 export default function Todo() {
   const { id } = useParams();
@@ -107,6 +108,7 @@ export default function Todo() {
             Swal.fire({
               icon: "success",
               title: "Tâche supprimée avec succès",
+              showConfirmButton : false
             });
           })
           .catch((res) => {
@@ -138,26 +140,28 @@ export default function Todo() {
                   <form id={taskId} onSubmit={(e) => handleUpdate(e, taskId)}>
                     <p>{task}</p>
                   </form>
-                  <div>
-                    <button
-                      className="mod"
-                      onClick={() => {
-                        setIsModified(true);
-                        setTask(task);
-                        setTid(taskId);
-                      }}
-                    >
-                      <img src={edit} alt="modifier" />
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      className="dlt"
-                      onClick={(e) => handleSupprimer(e, taskId)}
-                      disabled={isModified ? true : false}
-                    >
-                      <img src={dlt} alt="supprimer" />
-                    </button>
+                  <div className="TodoBtnCont">
+                    <div>
+                      <button
+                        className="mod"
+                        onClick={() => {
+                          setIsModified(true);
+                          setTask(task);
+                          setTid(taskId);
+                        }}
+                      >
+                        <img src={edit} alt="modifier" />
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="dlt"
+                        onClick={(e) => handleSupprimer(e, taskId)}
+                        disabled={isModified ? true : false}
+                      >
+                        <img src={dlt} alt="supprimer" />
+                      </button>
+                    </div>
                   </div>
                   <div>{taskDate}</div>
                 </div>
@@ -196,9 +200,7 @@ export default function Todo() {
             </button>
           ) : (
             <div>
-              <button className="btnAddMarche" name="btn" onClick={handleAjouter}>
-                Ajouter cette tache
-              </button>
+                <img className="AddTaskImg" src={add} onClick={handleAjouter} alt="Ajouter cette tache" title="Ajouter cette tache"/>
             </div>
           )}
         </div>

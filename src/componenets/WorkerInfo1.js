@@ -58,8 +58,8 @@ export default function WorkerInfo() {
               <img src={userlogo} alt="user logo" />
               <div style={{marginLeft : "10px"}}>
                 <h1 style={{ textTransform: "capitalize" }}>{ud.username}</h1>
-                <h4>CIN : {ud.cin}</h4>
                 <h4>Tél : {ud.telephone}</h4>
+                <h4>Email : {ud.email}</h4>
               </div>
             </div>
           ))}
@@ -161,7 +161,7 @@ export default function WorkerInfo() {
             <img src={more} alt="show markets" />
           </button>
         </div>
-        <div className="UserActs" id="tasks" style={{marginLeft:"50px"}}>
+        <div className="UserActs" id="tasks">
           {data !== undefined &&
             data
               .filter((d) => d.id === worker)
@@ -170,12 +170,13 @@ export default function WorkerInfo() {
                   <div
                     key={data.id}
                     className="userMarket"
-                    style={{justifyContent:'space-around',width:"95%" , borderBottom : '1px solid'}}
+                    
                   >
-                    <div style={{ width : "65%"}}>
-                      <p style={{wordBreak : 'break-word' , textAlign:'start' , width : "70%"}}>{tache.task}</p>
+                    <div style={{ width : "100%" , display : "flex" , justifyContent : 'space-between'}}>
+                      <p style={{wordBreak : 'break-word' , width : "70%"}}>{tache.task}</p>
                     </div>
-                    <div style={{width : "30%"}}>
+
+                    <div style={{width : "20%"}}>
                       <p>{tache.taskDate}</p>
                     </div>
                   </div>

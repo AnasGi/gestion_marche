@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "@fortawesome/fontawesome-free/css/all.css";
-import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
 import user_icon from "../Assets/person.png";
 import tele_icon from "../Assets/tele.png";
 import ErrorLogo from "../imgs/mark.png";
+import CIN from "../Assets/cin.png";
 
 export default function SignUp() {
   const [infos, setInfos] = useState({
+    cin : "",
     username: "",
     password: "",
     telephone: "",
@@ -71,26 +72,27 @@ export default function SignUp() {
 
   function handleSignIn(e) {
     e.preventDefault();
+    let cinRegex = /^EE[0-9]{6}$/
     let usernameRegex = new RegExp("^[A-Za-z][A-Za-z0-9_]{2,29}$");
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let teleRegex = /^06\d{8}$/;
 
-    if (infos.username === "") {
+
+    if (infos.cin === "") {
+      setMsgError("Veuillez saisir votre CIN");
+    } else if (Data.find((dt) => dt.cin === infos.cin)) {
+      setMsgError("Ce CIN est déjà utilisé ");
+    } else if (!cinRegex.test(infos.cin)) {
+      setMsgError("Votre CIN format est invalide");
+    } else if (infos.username === "") {
       setMsgError("Veuillez saisir votre nom d'utilisateur");
     } else if (Data.find((dt) => dt.username === infos.username)) {
       setMsgError("Ce nom utilisateur est déjà utilisé");
     } else if (!usernameRegex.test(infos.username)) {
       setMsgError("Votre nom utilisateur est trop court");
-    } else if (/\d/.test(infos.username)) {
-      setMsgError("Votre nom utilisateur ne doit pas contenir des chiffres");
     } else if (infos.password === "") {
       setMsgError("Veuillez saisir un mot de passe");
-    } else if (indicatorClass() === "fort") {
-      setMsgError("Veuillez saisir un mot de passe");
-    } else if (infos.email === "") {
-      setMsgError("Veuillez saisir votre email");
-    } else if (!emailRegex.test(infos.email)) {
-      setMsgError("Email format est invalide");
+    } else if (indicatorClass() !== "fort") {
+      setMsgError("Le mot de passe doit etre fort");
     } else if (infos.telephone === "") {
       setMsgError("Veuillez saisir votre téléphone");
     } else if (!teleRegex.test(infos.telephone)) {
@@ -123,7 +125,7 @@ export default function SignUp() {
             style={{ justifyContent: "center", height: "40px" }}
           >
             <img
-              style={{ width: "20px", height: "20px" }}
+              style={{height: "20px" }}
               src={ErrorLogo}
               alt="error"
             />{" "}
@@ -131,8 +133,25 @@ export default function SignUp() {
           </span>
         )}
         <div className="inputs">
+
           <div className="input">
-            <img src={user_icon} alt="" />
+            <img
+              style={{height: "30px" }}
+              src={CIN} alt="" />
+            <input
+              type="text"
+              name="cin"
+              onChange={(e) => handleInfos(e)}
+              placeholder="Entrer votre CIN"
+            />
+          </div>
+
+          <div className="input">
+            <img 
+              src={user_icon}
+              style={{height: "30px" }}
+              alt="" 
+            />
             <input
               type="text"
               name="username"
@@ -142,7 +161,9 @@ export default function SignUp() {
           </div>
 
           <div className="input">
-            <img src={password_icon} alt="" />
+            <img src={password_icon}
+              style={{height: "30px" }}
+             alt="" />
             <div style={{ position: "relative" }}>
               <input
                 type={showPassword ? "text" : "password"}
@@ -162,7 +183,7 @@ export default function SignUp() {
                 onClick={VisibilityPass}
                 style={{
                   position: "absolute",
-                  right: "-150px",
+                  right: "-120px",
                   top: "6px",
                   cursor: "pointer",
                 }}
@@ -188,20 +209,10 @@ export default function SignUp() {
           </div>}
 
           <div className="input">
-            <img src={email_icon} alt="" />
-            <input
-              type="text"
-              name="email"
-              onChange={(e) => handleInfos(e)}
-              placeholder="exemple@gmail.com"
-            />
-          </div>
-
-          <div className="input">
             <img
               src={tele_icon}
               alt=""
-              style={{ width: "30px", height: "30px" }}
+              style={{height: "30px" }}
             />
             <input
               type="tel"

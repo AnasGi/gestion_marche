@@ -3,6 +3,8 @@ import axios from 'axios'
 import stop from '../imgs/stop.png'
 import reprise from '../imgs/reprise.png'
 import delM from '../imgs/delete.png'
+import timer from '../imgs/timer.png'
+import start from '../imgs/start.png'
 
 export default function CarteMarche({marche , id}) {
   
@@ -15,11 +17,13 @@ export default function CarteMarche({marche , id}) {
 
   function UpdateOrder(order , num){
 
+    let dateOrderChange = `${new Date().getDate()}/${new Date().getMonth()+1}/${new Date().getFullYear()}`
+
     const elemToUpdateOrder = existingData.marches.find(m=>m.num === num)
     const idx = existingData.marches.indexOf(elemToUpdateOrder)
 
     
-    existingData.marches.splice(idx , 1 , {...elemToUpdateOrder , orderArret : order })
+    existingData.marches.splice(idx , 1 , {...elemToUpdateOrder , orderArret : order , dateOrder : dateOrderChange })
     
     axios.put(`http://localhost:3001/users/${id}`, existingData)
       .then((res)=>console.log('order mod good'))
@@ -71,7 +75,7 @@ export default function CarteMarche({marche , id}) {
                   MarketTime(marche.dateDebut , marche.dateFin).up ? 
                   <div style={{display : 'flex' , alignItems : 'center' , justifyContent : 'center' , gap : '10px'}}>
                     <p style={{color : 'red'}}>Le delai est surpassé par {-MarketTime(marche.dateDebut , marche.dateFin).time} jour(s)</p>
-                    <button onClick={()=>DeleteMarche(marche.num)}><img style={{width : '30px' , height : '30px'}} src={delM} alt='suprrimer marché'/></button>
+                    <img onClick={()=>DeleteMarche(marche.num)} className='dlt' style={{height : '20px' , padding : "5px"}} src={delM} alt='suprrimer marché'/>
                   </div>
                   :
                   <p>
@@ -85,10 +89,19 @@ export default function CarteMarche({marche , id}) {
                 <p>Pas encore commencé</p>
               </div>
             }  
-            <div className='orderbtnCont'>
-                <button onClick={()=>UpdateOrder(true , marche.num)} className='stop'>Ordre de l'arrét</button>
-                <button onClick={()=>UpdateOrder(false , marche.num)} className='reprise'>Ordre de reprise</button>
-            </div>
+            {
+              new Date(marche.dateDebut) <= new Date() &&
+              (marche.orderArret ?
+              <div className='orderbtnCont'>
+                    <button onClick={()=>UpdateOrder(true , marche.num)} style={{cursor : "not-allowed"}} disabled={true} className='stop'>Ordre de l'arrét</button>
+                    <button onClick={()=>UpdateOrder(false , marche.num)} disabled={false} className='reprise'>Ordre de reprise</button>
+              </div> 
+              :
+              <div className='orderbtnCont'>
+                    <button onClick={()=>UpdateOrder(true , marche.num)} disabled={false} className='stop'>Ordre de l'arrét</button>
+                    <button onClick={()=>UpdateOrder(false , marche.num)} style={{cursor : "not-allowed"}} disabled={true} className='reprise'>Ordre de reprise</button>
+              </div> )
+            }
           </div>
 
 
@@ -121,13 +134,20 @@ export default function CarteMarche({marche , id}) {
             
           </div>
 
-          <div>
+          <div style={{textAlign:'center' , width : '70px'}}>
             {
-              marche.orderArret === true ?
-              <img style={{width : '30px' , height : '30px'}} src={stop} alt='order arret'/>
+              new Date(marche.dateDebut) <= new Date() ?
+              (marche.orderArret === true ?
+                <img style={{width : '30px' , height : '30px'}} src={stop} alt='order arret'/>
+                :
+                marche.orderArret === false ?
+                <img style={{width : '30px' , height : '30px'}} src={reprise} alt='order de reprise'/>
+                :
+                <img style={{width : '30px' , height : '30px'}} src={start} alt='order de début'/>)
               :
-              <img style={{width : '30px' , height : '30px'}} src={reprise} alt='order de reprise'/>
+              <img style={{height : '20px'}} src={timer} alt="pas encore commencer" />
             }
+            <p>{marche.dateOrder}</p>
           </div>
         </div>
     )

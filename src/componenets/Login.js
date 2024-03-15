@@ -60,7 +60,9 @@ export default function LoginT() {
         </div>
         <div className="inputs">
           <div className="input">
-            <img src={user_icon} alt="" />
+            <img src={user_icon}
+            style={{height: "30px" }}
+             alt="" />
             <input
               type="text"
               name="username"
@@ -80,7 +82,9 @@ export default function LoginT() {
           )}
 
           <div className="input">
-            <img src={password_icon} alt="" />
+            <img src={password_icon} 
+            style={{height: "30px" }}
+            alt="" />
             <div style={{ position: "relative" }}>
               <input
                 type={showPassword ? "text" : "password"}

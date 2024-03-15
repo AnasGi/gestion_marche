@@ -62,7 +62,8 @@
           "dateFin": "2024-05-15",
           "theme": "kjbasc",
           "soustheme": "zdacazdcva zdvaczdvzd zadvzdvzdvzd",
-          "orderArret": true
+          "orderArret": true,
+          "dateOrder": "15/3/2024"
         }
       ],
       "taches": []
@@ -80,8 +81,7 @@
           "dateDebut": "2024-04-01",
           "dateFin": "2024-07-01",
           "theme": "sxczaxaz",
-          "soustheme": "zacxz zaczc zac zaczza",
-          "orderArret": false
+          "soustheme": "zacxz zaczc zac zaczza"
         },
         {
           "num": "3242/bg/2024",
@@ -90,8 +90,7 @@
           "dateDebut": "2024-04-24",
           "dateFin": "2024-05-23",
           "theme": "Services professionnels",
-          "soustheme": "Services juridiques",
-          "orderArret": true
+          "soustheme": "Services juridiques"
         },
         {
           "num": "6567/bg/2025",
@@ -100,8 +99,7 @@
           "dateDebut": "2024-03-20",
           "dateFin": "2024-04-24",
           "theme": "Fournitures et équipements",
-          "soustheme": "Équipements informatiques et logiciels",
-          "orderArret": true
+          "soustheme": "Équipements informatiques et logiciels"
         },
         {
           "num": "2890/bg/2024",
@@ -111,7 +109,8 @@
           "dateFin": "2024-04-10",
           "theme": "Infrastructure et construction",
           "soustheme": "Construction de routes et autoroutes",
-          "orderArret": false
+          "orderArret": true,
+          "dateOrder": "15/3/2024"
         },
         {
           "num": "9090/bg/2024",
@@ -129,7 +128,9 @@
           "dateDebut": "2024-03-14",
           "dateFin": "2024-04-05",
           "theme": "Infrastructure et construction",
-          "soustheme": "Construction de bâtiments gouvernementaux"
+          "soustheme": "Construction de bâtiments gouvernementaux",
+          "orderArret": false,
+          "dateOrder": "15/3/2024"
         }
       ],
       "taches": [
@@ -139,24 +140,9 @@
           "taskDate": "March 12, 2024 9:53 AM"
         },
         {
-          "taskId": 0.9725691095451054,
-          "task": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "taskDate": "March 12, 2024 9:53 AM"
-        },
-        {
-          "taskId": 0.47198667982447007,
-          "task": "do homework",
-          "taskDate": "March 12, 2024 9:53 AM"
-        },
-        {
-          "taskId": 0.39589891539250655,
-          "task": "anas",
-          "taskDate": "March 12, 2024 10:03 AM"
-        },
-        {
-          "taskId": 0.6059852462077957,
-          "task": "EEFDFSSFG",
-          "taskDate": "March 13, 2024 9:37 AM"
+          "taskId": 0.33635533850732946,
+          "task": "do projects",
+          "taskDate": "March 14, 2024 10:12 AM"
         }
       ]
     },
@@ -186,6 +172,28 @@
       "telephone": "0656557865",
       "email": "nefodaf579@hisotyr.com",
       "marches": [],
+      "taches": []
+    },
+    {
+      "id": "1f27",
+      "cin": "EE223443",
+      "username": "anass1",
+      "password": "AnTest098@",
+      "telephone": "0667788996",
+      "email": "",
+      "marches": [
+        {
+          "num": "3/bg/2024",
+          "objet": "jjkgsxvhxs",
+          "lieu": "kech",
+          "dateDebut": "2024-03-16",
+          "dateFin": "2024-03-22",
+          "theme": "Transport et logistique",
+          "soustheme": "Logistique et gestion des chaînes d'approvisionnement",
+          "orderArret": false,
+          "dateOrder": "4/3/2024"
+        }
+      ],
       "taches": []
     }
   ]

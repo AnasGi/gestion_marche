@@ -20,6 +20,7 @@ export default function AddMarche() {
   const [ExistingData, setExistingData] = useState({});
   const [ErrorMsg, setErrorMsg] = useState("");
   const [ErrorStyle, setErroStyle] = useState(false);
+  let numMarcheFormat = `/bg/${new Date().getFullYear()}`
 
   function handleMarcheInfos(e) {
     e.preventDefault();
@@ -59,7 +60,8 @@ export default function AddMarche() {
 
     function IsNumMarcheExist() {
       let d = ExistingData.marches;
-      if (d.find((mr) => mr.num === MarcheInfo.num) !== undefined) {
+      // let m1 = `/bg/${new Date().getFullYear()}`
+      if (d.find((mr) => mr.num === MarcheInfo.num+numMarcheFormat) !== undefined) {
         return true;
       }
       return false;
@@ -88,7 +90,8 @@ export default function AddMarche() {
     } 
     else {
       setErrorMsg("");
-      ExistingData.marches.push(MarcheInfo);
+
+      ExistingData.marches.push({...MarcheInfo , num : MarcheInfo.num+numMarcheFormat});
 
       axios
         .put(`http://localhost:3001/users/${id}`, ExistingData)
@@ -111,13 +114,17 @@ export default function AddMarche() {
         <div className="AddCont">
           <div className="input-bx">
             <label className="title">Numero du marché *</label>
-            <input
-              type="text"
-              pattern="[0-9]{4}/bg/20[2-9]{2}"
-              name="num"
-              onChange={(e) => handleMarcheInfos(e)}
-              placeholder="xxxx/bg/20xx"
-            />
+            <div style={{display : 'flex' , alignItems : 'center'}}>
+              <input
+                type="text"
+                style={{width : "50px"}}
+                // pattern="[0-9]{4}/bg/20[2-9]{2}"
+                name="num"
+                onChange={(e) => handleMarcheInfos(e)}
+                // placeholder="xxxx/bg/20xx"
+              />
+              <span>/bg/{new Date().getFullYear()}</span>
+            </div>
           </div>
 
           <div className="input-bx">
