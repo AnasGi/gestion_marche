@@ -84,19 +84,19 @@ export default function WorkerInfo() {
               .map((dt) =>
                 dt.marches.map((marche) => (
                   <details key={data.id}>
-                    <summary className="MarketInfoSummary" style={{padding : "10px 5px" ,}}>
+                    <summary className="MarketInfoSummary" style={{padding : "10px 5px"}}>
                       <span>
                         {
                           new Date(marche.dateDebut) <= new Date() ?
                           (marche.orderArret ?
-                            <img style={{height : '20px'}} src={stop} alt="" />
+                            <img className="logoImg" src={stop} alt="" />
                             : 
                             marche.orderArret === false ?
-                            <img style={{height : '20px'}} src={reprise} alt="" />
+                            <img className="logoImg" src={reprise} alt="" />
                             :
-                            <img style={{height : '20px'}} src={start} alt="" />)
+                            <img className="logoImg" src={start} alt="" />)
                           :
-                          <img style={{height : '20px'}} src={timer} alt="" />
+                          <img className="logoImg" src={timer} alt="" />
                         }
                         <span>
                           {marche.num}
@@ -153,7 +153,7 @@ export default function WorkerInfo() {
         <div className="marcheHeader">
           <h3>
             <span>
-              Taches <span className="stats">{tachesNumber}</span>
+              Taches  <span className="stats">{tachesNumber}</span>
             </span>
             <hr />
           </h3>
@@ -161,24 +161,35 @@ export default function WorkerInfo() {
             <img src={more} alt="show markets" />
           </button>
         </div>
-        <div className="UserActs" id="tasks" style={{marginLeft:"50px"}}>
+        <div className="UserActs" id="tasks">
           {data !== undefined &&
             data
               .filter((d) => d.id === worker)
               .map((dt) =>
-                dt.taches.map((tache) => (
-                  <div
-                    key={data.id}
-                    className="userMarket"
-                    style={{justifyContent:'space-around',width:"95%" , borderBottom : '1px solid'}}
-                  >
-                    <div style={{ width : "65%"}}>
-                      <p style={{wordBreak : 'break-word' , textAlign:'start' , width : "70%"}}>{tache.task}</p>
-                    </div>
-                    <div style={{width : "30%"}}>
-                      <p>{tache.taskDate}</p>
-                    </div>
-                  </div>
+                dt.marches.map((mar) => (
+                  <details key={mar.num}>
+                    <summary className="MarketInfoSummary" style={{padding : "10px 5px"}}>
+                        <span>
+                          {mar.num}
+                          <span className="stats">{dt.taches.filter(tch=>tch.numMarche === mar.num).length}</span>
+                        </span>
+                    </summary>
+
+                    {
+                      dt.taches.filter(tch=>tch.numMarche === mar.num).length !== 0 ?
+                      (dt.taches.filter(tch=>tch.numMarche === mar.num).map(tache=>
+                        <div style={{display : 'flex' , justifyContent : 'space-around' , alignItems:"center"}}>
+                          <p style={{wordBreak:'break-word' , width : "60%", borderRight : "1px solid"}}>{tache.task}</p>
+                          <p>{tache.taskDate}</p>
+                        </div>
+                      ))
+                      :
+                      <div style={{display : 'flex' , justifyContent : 'space-around'}}>
+                        <p>Pas de taches</p>
+                      </div>
+                    }
+
+                  </details>
                 ))
               )}
         </div>

@@ -16,6 +16,7 @@ export default function Todo() {
   const [errortask, setErrortask] = useState("");
   const [isClick, setIsClick] = useState(false);
   const [isModified, setIsModified] = useState(false);
+  const [numMarche, setNumMarche] = useState("");
 
   useEffect(() => {
     axios
@@ -41,11 +42,15 @@ export default function Todo() {
     event.preventDefault();
     if (task === "") {
       setErrortask("La tache ne peut pas etre vide");
-    } else {
+    }
+    else if (numMarche === ""){
+      setErrortask("Veuillez choisir un marché.");
+    } 
+    else {
       setErrortask("");
       setTask("");
       setIsClick((prev) => !prev);
-      existingData.taches.push({ taskId, task, taskDate });
+      existingData.taches.push({ taskId, task, taskDate, numMarche });
       axios
         .put(`http://localhost:3001/users/${id}`, existingData)
         .then((res) => {
@@ -62,10 +67,18 @@ export default function Todo() {
 
     if (task === "") {
       setErrortask("La tache ne peut pas etre vide");
+    }
+    else if (numMarche === ""){
+      setErrortask("Veuillez choisir un marché."); 
     } else {
       let elementToDlt = existingData.taches.find((ext) => ext.taskId === tId);
       let taskIndex = existingData.taches.indexOf(elementToDlt);
-      existingData.taches.splice(taskIndex, 1, { taskId, task, taskDate });
+      existingData.taches.splice(taskIndex, 1, {
+        taskId,
+        task,
+        taskDate,
+        numMarche,
+      });
       setIsClick((prev) => !prev);
       setIsModified(false);
       setTask("");
@@ -108,7 +121,8 @@ export default function Todo() {
             Swal.fire({
               icon: "success",
               title: "Tâche supprimée avec succès",
-              showConfirmButton : false
+              showConfirmButton: false,
+              timer: 1000,
             });
           })
           .catch((res) => {
@@ -116,6 +130,7 @@ export default function Todo() {
               icon: "error",
               title: "Erreur",
               text: "Un problème est survenu lors de la suppression de la tache",
+              timer: 1000,
             });
             setErrortask(
               "Un probléme est survenu lors de la suppression de la tache"
@@ -127,59 +142,88 @@ export default function Todo() {
 
   return (
     <div className="todoCont">
+      <select onChange={(e) => setNumMarche(e.target.value)} className="inputs">
+        <option></option>
+        {existingData.marches !== undefined &&
+          existingData.marches.map((exdata) => <option>{exdata.num}</option>)}
+      </select>
       <h3 className="msg" key={errortask}>
         {errortask}
       </h3>
+
       <div key={isClick}>
-        {existingData.taches !== undefined &&
-          (existingData.taches.length !== 0 ? (
-            existingData.taches.map((tache, i) => {
-              const { taskId, task, taskDate } = tache;
-              return (
-                <div className="taskCont" key={i}>
-                  <form id={taskId} onSubmit={(e) => handleUpdate(e, taskId)}>
-                    <p>{task}</p>
-                  </form>
-                  <div className="TodoBtnCont">
-                    <div>
-                      <button
-                        className="mod"
-                        onClick={() => {
-                          setIsModified(true);
-                          setTask(task);
-                          setTid(taskId);
-                        }}
-                      >
-                        <img src={edit} alt="modifier" />
-                      </button>
-                    </div>
-                    <div>
-                      <button
-                        className="dlt"
-                        onClick={(e) => handleSupprimer(e, taskId)}
-                        disabled={isModified ? true : false}
-                      >
-                        <img src={dlt} alt="supprimer" />
-                      </button>
-                    </div>
-                  </div>
-                  <div>{taskDate}</div>
-                </div>
-              );
-            })
-          ) : (
+        {
+          numMarche === "" ?
             <p
               style={{
-                textAlign: "center",
-                fontSize: "18px",
-                color: "#555",
-                fontStyle: "italic",
-                marginTop: "20px",
-              }}
-            >
-              Aucune tâche disponible pour le moment.
+                  textAlign: "center",
+                  fontSize: "18px",
+                  color: "#555",
+                  fontStyle: "italic",
+                  marginTop: "20px",
+                }}
+              >
+                Veuillez choisir un marché.
             </p>
-          ))}
+          :
+          (existingData.taches !== undefined) && 
+          (
+            (existingData.taches.filter((exdt) => exdt.numMarche === numMarche).length !== 0) 
+            ?
+            (
+              existingData.taches
+              .filter((exdt) => exdt.numMarche === numMarche)
+              .map((tache, i) => {
+                const { taskId, task, taskDate } = tache;
+                return (
+                  <div className="taskCont" key={i}>
+                    <form id={taskId} onSubmit={(e) => handleUpdate(e, taskId)}>
+                      <p>{task}</p>
+                    </form>
+                    <div className="TodoBtnCont">
+                      <div>
+                        <button
+                          className="mod"
+                          onClick={() => {
+                            setIsModified(true);
+                            setTask(task);
+                            setTid(taskId);
+                          }}
+                        >
+                          <img src={edit} alt="modifier" />
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          className="dlt"
+                          onClick={(e) => handleSupprimer(e, taskId)}
+                          disabled={isModified ? true : false}
+                        >
+                          <img src={dlt} alt="supprimer" />
+                        </button>
+                      </div>
+                    </div>
+                    <div>{taskDate}</div>
+                  </div>
+                );
+              })
+            ) 
+            : 
+            (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  color: "#555",
+                  fontStyle: "italic",
+                  marginTop: "20px",
+                }}
+              >
+                Aucune tâche disponible pour ce marché.
+              </p>
+            )
+          )
+        }
       </div>
 
       <form>
@@ -200,7 +244,13 @@ export default function Todo() {
             </button>
           ) : (
             <div>
-                <img className="AddTaskImg" src={add} onClick={handleAjouter} alt="Ajouter cette tache" title="Ajouter cette tache"/>
+              <img
+                className="AddTaskImg"
+                src={add}
+                onClick={handleAjouter}
+                alt="Ajouter cette tache"
+                title="Ajouter cette tache"
+              />
             </div>
           )}
         </div>

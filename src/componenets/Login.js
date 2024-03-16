@@ -61,7 +61,7 @@ export default function LoginT() {
         <div className="inputs">
           <div className="input">
             <img src={user_icon}
-            style={{height: "30px" }}
+            className="formLogos"
              alt="" />
             <input
               type="text"
@@ -73,7 +73,7 @@ export default function LoginT() {
           {usernameError !== "" && (
             <span className="error">
               <img
-                style={{ width: "20px", height: "20px" }}
+                className="logoImg"
                 src={ErrorLogo}
                 alt="error"
               />{" "}
@@ -83,7 +83,7 @@ export default function LoginT() {
 
           <div className="input">
             <img src={password_icon} 
-            style={{height: "30px" }}
+            className="formLogos"
             alt="" />
             <div style={{ position: "relative" }}>
               <input
@@ -109,7 +109,7 @@ export default function LoginT() {
           {passwordError !== "" && (
             <span className="error">
               <img
-                style={{ width: "20px", height: "20px" }}
+                className="logoImg"
                 src={ErrorLogo}
                 alt="error"
               />{" "}

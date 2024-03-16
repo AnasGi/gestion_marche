@@ -22,7 +22,7 @@ export default function AdminInterface() {
         <fieldset key={dt.id} className='carteField'>
           <legend id={dt.id}>
             <h1 style={{textTransform : 'capitalize'}}>
-              <img style={{width : '30px' , height : '30px', paddingRight : '10px'}} src={userlogo} alt='user logo'/>
+              <img className='formLogos' style={{paddingRight : '10px'}} src={userlogo} alt='user logo'/>
               {dt.username}
               <p id='plusInfos' onClick={()=>navigate(`/WorkerInfo/${dt.id}/${token}`)}>Plus d'information
               <img src={more} alt='show more'/>

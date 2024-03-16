@@ -136,7 +136,7 @@ export default function SignUp() {
 
           <div className="input">
             <img
-              style={{height: "30px" }}
+              className="formLogos"
               src={CIN} alt="" />
             <input
               type="text"
@@ -149,7 +149,7 @@ export default function SignUp() {
           <div className="input">
             <img 
               src={user_icon}
-              style={{height: "30px" }}
+              className="formLogos"
               alt="" 
             />
             <input
@@ -162,7 +162,7 @@ export default function SignUp() {
 
           <div className="input">
             <img src={password_icon}
-              style={{height: "30px" }}
+              className="formLogos"
              alt="" />
             <div style={{ position: "relative" }}>
               <input
@@ -212,7 +212,7 @@ export default function SignUp() {
             <img
               src={tele_icon}
               alt=""
-              style={{height: "30px" }}
+              className="formLogos"
             />
             <input
               type="tel"

@@ -51,7 +51,7 @@ export default function WorkerInterface(props) {
           </div>
         )}
         <a href="#toTop" className="top">
-          <img style={{width : '30px' , height : '30px'}} src={Up} alt="aller au top" title="Aller au top"/>
+          <img className="formLogos" src={Up} alt="aller au top" title="Aller au top"/>
         </a>
       </fieldset>
     ))

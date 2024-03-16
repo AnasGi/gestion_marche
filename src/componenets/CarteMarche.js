@@ -145,7 +145,7 @@ export default function CarteMarche({marche , id}) {
                 :
                 <img style={{width : '30px' , height : '30px'}} src={start} alt='order de début'/>)
               :
-              <img style={{height : '20px'}} src={timer} alt="pas encore commencer" />
+              <img className="logoImg" src={timer} alt="pas encore commencer" />
             }
             <p>{marche.dateOrder}</p>
           </div>

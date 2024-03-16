@@ -11,6 +11,34 @@
   }
 }
 
+/* scroll bar ---------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(191, 175, 175, 0.49);
+  border-radius: 10px;
+}
+
+/* sweet Alert ---------------------------------------*/
+
+div:where(.swal2-container){
+  backdrop-filter: blur(10px);
+}
+
+/* logo images ---------------------------------- */
+
+.logoImg{
+  height: 20px;
+}
+
+.formLogos{
+  height: 30px;
+}
 
 /* Buttons ------------------------ */
 button, input[type= 'date'] , select{
@@ -18,6 +46,7 @@ button, input[type= 'date'] , select{
 }
 
 /* App component ---------------------------------------------------- */
+
 #root,
 body,
 html {
@@ -448,17 +477,6 @@ header details > div > a:hover {
   text-transform: capitalize;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(191, 175, 175, 0.49);
-  border-radius: 10px;
-}
-
 .confirm,
 .showMarkets {
   background-color: transparent;
@@ -515,15 +533,9 @@ header details > div > a:hover {
 
 /* WorkerInfo ---------------------------------------------- */
 
-/* .bigInfosCont {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
 .InfoWorkerCont {
   display: flex;
-  /* justify-content: space-around; */
+  justify-content: space-between;
   align-items: center;
   width: 80%;
 }
@@ -681,11 +693,7 @@ header details > div > a:hover {
   background: linear-gradient(to right ,#61045f,#aa076b);
 }
 
-
-
-
-/* SignUp password strength */
-
+/* SignUp password strength --------------------------- */
 
 .password-strength-indicator {
   height: 10px;
@@ -714,8 +722,4 @@ header details > div > a:hover {
   font-size: 14px; 
   margin-left: 12px;
   user-select: none;
-}
-
-div:where(.swal2-container){
-  backdrop-filter: blur(10px);
 }
