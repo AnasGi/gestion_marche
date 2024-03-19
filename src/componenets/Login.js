@@ -5,6 +5,7 @@ import ErrorLogo from "../imgs/mark.png";
 import password_icon from "../Assets/password.png";
 import user_icon from "../Assets/person.png";
 import SecurityKey from "../SecurityKey";
+import mark from "../imgs/mark.png";
 
 export default function LoginT() {
   const [infos, setInfos] = useState({ username: "", password: "" });
@@ -49,6 +50,7 @@ export default function LoginT() {
   }
 
   return (
+    Data !== 'error' ?
     <div className="containerlogIn">
       <div>
         <h1>Bienvenue</h1>
@@ -123,5 +125,10 @@ export default function LoginT() {
         </div>
       </form>
     </div>
+  :
+  <div style={{textAlign : 'center'}}>
+    <img style={{height : '50px'}} src={mark} alt='' />
+    <h3>Un erreur est servenu lors de la recuperation des données</h3>
+  </div>
   );
 }

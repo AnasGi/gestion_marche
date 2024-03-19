@@ -6,7 +6,12 @@ import Swal from "sweetalert2";
 export default function AddMarche() {
   const { id } = useParams();
   const Data = UseData();
-  const dataMarches = Data.find((dt) => dt.id === "Admin");
+
+  let dataMarches = {}
+
+  if(Data !== 'load'){
+    dataMarches = Data.find((dt) => dt.id === "Admin");
+  }
 
   const [MarcheInfo, setMarcheInfo] = useState({
     num: "",
@@ -31,7 +36,6 @@ export default function AddMarche() {
   function getSousThemes() {
     if (MarcheInfo.theme !== "") {
       let d = dataMarches.marches.find((th) => th.theme === MarcheInfo.theme);
-      console.log(MarcheInfo);
       return d.soustheme.map((sth, i) => <option key={i}>{sth}</option>);
     }
   }
@@ -161,7 +165,7 @@ export default function AddMarche() {
               onChange={(e) => handleMarcheInfos(e)}
             >
               <option></option>
-              {dataMarches !== undefined &&
+              {dataMarches.marches !== undefined &&
                 dataMarches.marches.map((th, i) => (
                   <option key={i}>{th.theme}</option>
                 ))}

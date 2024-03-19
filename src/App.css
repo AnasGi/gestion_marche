@@ -309,6 +309,7 @@ header {
   position: sticky;
   top: 0;
   user-select: none;
+  z-index: 10;
 }
 
 header img {
@@ -356,7 +357,7 @@ header details > summary {
   font-weight: 600;
 }
 
-header details > div {
+.respons > div {
   overflow: scroll;
   height: 200px;
   width: 100%;
@@ -365,7 +366,31 @@ header details > div {
   background-color: white;
 }
 
-header details > div > a {
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actions button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 2px solid #4CAF50; /* Green border */
+  color: #ffffff; /* White text */
+  background-color: #4CAF50; /* Green background */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.actions button:hover {
+  background-color: #45a049; /* Darker green background on hover */
+  border-color: #45a049; /* Darker green border on hover */
+}
+
+.respons > div > a {
   display: block;
   text-decoration: none;
   padding: 10px;
@@ -377,10 +402,11 @@ header details > div > a {
   font-size: 15px;
 }
 
-header details > div > a:hover {
+.respons > div > a:hover {
   font-weight: 700;
   text-decoration: underline;
 }
+
 
 /* Todo component --------------------------------- */
 .todoCont {
@@ -389,7 +415,7 @@ header details > div > a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   overflow: auto;
 }
 
@@ -444,13 +470,13 @@ header details > div > a:hover {
 }
 
 .taskCont {
+  border-bottom: 1px solid #878787;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
-  width: 95%;
-  border-bottom: 1px solid gray;
-  padding: 10px 15px;
 }
 
 .TodoBtnCont {
@@ -478,7 +504,7 @@ header details > div > a:hover {
 }
 
 .confirm,
-.showMarkets {
+.showMarkets { /*WorkerInfos*/
   background-color: transparent;
   border: none;
   border-radius: 50%;
@@ -492,13 +518,11 @@ header details > div > a:hover {
 .mod,
 .dlt{
   background-color: transparent;
-  border: 1px solid #007bff;
+  border: none;
   border-radius: 7px;
   transition: .3s;
 }
-.dlt{
-  border: 1px solid #a5a5a5;
-}
+
 .mod:hover{
   background-color: #5ea6f4;
 }
@@ -509,19 +533,8 @@ header details > div > a:hover {
   background-color: lightgreen;
 }
 
-.mod:hover,
-.dlt:hover,
-.confirm:hover,
-.showMarkets:hover {
-  cursor: pointer;
-}
-
-.showMarkets:hover {
-  background-color: #007bff;
-}
-
 .taskCont img,
-.showMarkets img {
+.showMarkets img { /*WorkerInfos*/
   height: 15px;
   padding: 5px;
 }
@@ -529,6 +542,15 @@ header details > div > a:hover {
 .confirm img {
   width: 40px;
   height: 40px;
+}
+
+.select-box {
+  width: 30%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
 }
 
 /* WorkerInfo ---------------------------------------------- */
@@ -620,8 +642,9 @@ header details > div > a:hover {
   transition: .3s;
 }
 
-.top:hover{
-  background-color: #000000;
+
+.showMarkets:hover {
+  background-color: #007bff;
 }
 
 
@@ -689,7 +712,7 @@ header details > div > a:hover {
   border-radius: 6px;
   background: linear-gradient(to right ,#aa076b,#61045f);
 }
-.btnContAdd button:hover , .ModPassForm button:hover{
+.btnContAdd button:hover , .ModPassForm button:hover {
   background: linear-gradient(to right ,#61045f,#aa076b);
 }
 
@@ -723,3 +746,23 @@ header details > div > a:hover {
   margin-left: 12px;
   user-select: none;
 }
+
+
+/* loading ---------------------------------- */
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  --b: 8px; 
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%,#f03355) content-box;
+  -webkit-mask:
+              repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+              radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+          mask-composite: intersect;
+  animation:l4 1s infinite steps(10);
+}
+@keyframes l4 {to{transform: rotate(1turn)}}

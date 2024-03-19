@@ -57,6 +57,8 @@ export default function Todo() {
           Swal.fire({
             icon: "success",
             title: "Tâche ajoutée avec succès",
+            showConfirmButton : false,
+            timer:1000
           });
         });
     }
@@ -89,6 +91,8 @@ export default function Todo() {
           Swal.fire({
             icon: "success",
             title: "Tâche modifiée avec succès",
+            showConfirmButton : false,
+            timer:1000
           });
         });
     }
@@ -142,11 +146,12 @@ export default function Todo() {
 
   return (
     <div className="todoCont">
-      <select onChange={(e) => setNumMarche(e.target.value)} className="inputs">
-        <option></option>
+      <select onChange={(e) => setNumMarche(e.target.value)} className="select-box" disabled={isModified ? true : false}>
+        <option hidden value="">Choisir un marché</option>
         {existingData.marches !== undefined &&
           existingData.marches.map((exdata) => <option>{exdata.num}</option>)}
       </select>
+      
       <h3 className="msg" key={errortask}>
         {errortask}
       </h3>
@@ -243,15 +248,14 @@ export default function Todo() {
               <img src={ok} alt="confirm modfification" />
             </button>
           ) : (
-            <div>
+            <button style={{border:'none'}} onClick={handleAjouter}>
               <img
                 className="AddTaskImg"
                 src={add}
-                onClick={handleAjouter}
                 alt="Ajouter cette tache"
                 title="Ajouter cette tache"
               />
-            </div>
+            </button>
           )}
         </div>
       </form>

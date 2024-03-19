@@ -18,7 +18,7 @@ export default function AdminInterface() {
 
 
   return (
-    dt!==undefined && dt.filter(dt=>dt.id !== 'Admin').map(dt=>
+    dt!=='load' && dt.filter(dt=>dt.id !== 'Admin').map(dt=>
         <fieldset key={dt.id} className='carteField'>
           <legend id={dt.id}>
             <h1 style={{textTransform : 'capitalize'}}>

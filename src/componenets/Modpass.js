@@ -6,11 +6,15 @@ import UseData from '../hooks/UserHook'
 export default function Modpass() {
 
     const data = UseData()
-
-    const admin = data.find(dt=>dt.id === 'Admin')
-
+    
     const [newPass , setNewPass] = useState('')
     const [notice , setNotice] = useState('Nouveau mot de passe')
+
+    let admin = {}
+    
+    if(data !== 'load'){
+        admin = data.find(dt=>dt.id === 'Admin')
+    } 
 
     function ModifyPassword(e){
         e.preventDefault()

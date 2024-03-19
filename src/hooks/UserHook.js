@@ -3,11 +3,19 @@ import axios from 'axios'
 
 export default function UseData() {
     const [user , setUser] = useState([])
+    const [load , setLoad] = useState(true)
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/users')
+      const fetchData = async ()=>{
+        await axios.get('http://localhost:3001/users')
         .then(res=>setUser(res.data))
+        .catch(err=>setUser('error'))
+        setLoad(false)
+      }
+
+
+      fetchData()
     } , [])
 
-  return user;
+  return load ? 'load' :user;
 }

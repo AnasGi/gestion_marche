@@ -9,6 +9,8 @@ import user_icon from "../Assets/person.png";
 import tele_icon from "../Assets/tele.png";
 import ErrorLogo from "../imgs/mark.png";
 import CIN from "../Assets/cin.png";
+import mark from "../imgs/mark.png";
+
 
 export default function SignUp() {
   const [infos, setInfos] = useState({
@@ -114,6 +116,7 @@ export default function SignUp() {
   }
 
   return (
+    Data !== 'load'?
     <div className="containerSignUn">
       <form onSubmit={(e) => handleSignIn(e)}>
         <div className="header">
@@ -227,6 +230,11 @@ export default function SignUp() {
           </div>
         </div>
       </form>
+    </div>
+    :
+    <div style={{textAlign : 'center'}}>
+      <img style={{height : '50px'}} src={mark} alt='' />
+      <h3>Un erreur est servenu lors de la recuperation des données</h3>
     </div>
   );
 }

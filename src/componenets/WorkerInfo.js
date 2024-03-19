@@ -15,44 +15,53 @@ export default function WorkerInfo() {
   const [iterM, setIterM] = useState(0);
   const [iterT, setIterT] = useState(0);
 
-  const UserData = data.filter((dt) => dt.id === worker);
+  let marchesNumber = []
+  let tachesNumber = []
+  let UserData = []
 
-  const marchesNumber = data
-    .filter((d) => d.id === worker)
-    .map((dt) => dt.marches.length);
-  const tachesNumber = data
-    .filter((d) => d.id === worker)
-    .map((dt) => dt.taches.length);
+  if(data !== 'load'){
 
-  function ShowMarches() {
-    const d = document.getElementById("markets");
-    if (iterM === 0) {
-      d.style.height = "300px";
-      d.style.overflow = "scroll";
-      setIterM((prev) => prev + 1);
-    } else {
-      d.style.height = "0";
-      d.style.overflow = "hidden";
-      setIterM(0);
+    UserData = data.filter((dt) => dt.id === worker);
+  
+    marchesNumber = data
+      .filter((d) => d.id === worker)
+      .map((dt) => dt.marches.length);
+    tachesNumber = data
+      .filter((d) => d.id === worker)
+      .map((dt) => dt.taches.length);
     }
-  }
 
-  function ShowTasks() {
-    const d = document.getElementById("tasks");
-    if (iterT === 0) {
-      d.style.height = "300px";
-      d.style.overflow = "scroll";
-      setIterT((prev) => prev + 1);
-    } else {
-      d.style.height = "0";
-      d.style.overflow = "hidden";
-      setIterT(0);
+
+    function ShowMarches() {
+      const d = document.getElementById("markets");
+      if (iterM === 0) {
+        d.style.height = "300px";
+        d.style.overflow = "scroll";
+        setIterM((prev) => prev + 1);
+      } else {
+        d.style.height = "0";
+        d.style.overflow = "hidden";
+        setIterM(0);
+      }
     }
-  }
+  
+    function ShowTasks() {
+      const d = document.getElementById("tasks");
+      if (iterT === 0) {
+        d.style.height = "300px";
+        d.style.overflow = "scroll";
+        setIterT((prev) => prev + 1);
+      } else {
+        d.style.height = "0";
+        d.style.overflow = "hidden";
+        setIterT(0);
+      }
+    }
+
   return (
     <div className="InfoWorkerCont">
       <div>
-        {data !== undefined &&
+        {data !== 'load' &&
           UserData.map((ud) => (
             <div className="userSpace">
               <img src={userlogo} alt="user logo" />
@@ -78,7 +87,7 @@ export default function WorkerInfo() {
           </button>
         </div>
         <div className="UserActs" id="markets">
-          {data !== undefined &&
+          {data !== 'load' &&
             data
               .filter((d) => d.id === worker)
               .map((dt) =>
@@ -162,7 +171,7 @@ export default function WorkerInfo() {
           </button>
         </div>
         <div className="UserActs" id="tasks">
-          {data !== undefined &&
+          {data !== 'load' &&
             data
               .filter((d) => d.id === worker)
               .map((dt) =>
@@ -179,7 +188,7 @@ export default function WorkerInfo() {
                       dt.taches.filter(tch=>tch.numMarche === mar.num).length !== 0 ?
                       (dt.taches.filter(tch=>tch.numMarche === mar.num).map(tache=>
                         <div style={{display : 'flex' , justifyContent : 'space-around' , alignItems:"center"}}>
-                          <p style={{wordBreak:'break-word' , width : "60%", borderRight : "1px solid"}}>{tache.task}</p>
+                          <p style={{wordBreak:'break-word' , width : "60%", borderRight : "1px solid" , padding : "0px 5px"}}>{tache.task}</p>
                           <p>{tache.taskDate}</p>
                         </div>
                       ))
