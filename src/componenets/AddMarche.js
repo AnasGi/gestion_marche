@@ -16,16 +16,23 @@ export default function AddMarche() {
   const [MarcheInfo, setMarcheInfo] = useState({
     num: "",
     objet: "",
+    fournisseur : "",
     lieu: "",
     dateDebut: "",
-    dateFin: "",
+    delai: 0,
     theme: "",
     soustheme: "",
+    montant : 0,
+    dateAprob : "",
+    budget:"",
+    dateRecProv : "",
+    dateRecDef : "",
+    datePlie : "",
   });
   const [ExistingData, setExistingData] = useState({});
   const [ErrorMsg, setErrorMsg] = useState("");
   const [ErrorStyle, setErroStyle] = useState(false);
-  let numMarcheFormat = `/bg/${new Date().getFullYear()}`
+  const [resp, setResp] = useState("");
 
   function handleMarcheInfos(e) {
     e.preventDefault();
@@ -52,61 +59,86 @@ export default function AddMarche() {
 
     setErroStyle(prev=>!prev)
 
-    function IsEmpty() {
-      for (let key in MarcheInfo) {
-        if (MarcheInfo.hasOwnProperty(key) && MarcheInfo[key] === "") {
-          return true; // If at least one element is empty, return true
-        }
-      }
+    // function IsEmpty() {
+    //   for (let key in MarcheInfo) {
+    //     if (MarcheInfo.hasOwnProperty(key) && MarcheInfo[key] === "") {
+    //       return true; // If at least one element is empty, return true
+    //     }
+    //   }
 
-      return false; // If no empty elements found, return false
-    }
+    //   return false; // If no empty elements found, return false
+    // }
 
     function IsNumMarcheExist() {
       let d = ExistingData.marches;
-      // let m1 = `/bg/${new Date().getFullYear()}`
-      if (d.find((mr) => mr.num === MarcheInfo.num+numMarcheFormat) !== undefined) {
+      if (d.find((mr) => mr.num === MarcheInfo.num) !== undefined) {
         return true;
       }
       return false;
     }
 
-    function IsincorrectDate(){
-        if(MarcheInfo.dateDebut > MarcheInfo.dateFin){
-            return true
-        }
-        else if(new Date(MarcheInfo.dateDebut) < new Date() || new Date(MarcheInfo.dateFin) < new Date()){
-            return true
-        }
-        else{
-            return false
-        }
-    }
+    // function IsincorrectDate(){
+    //     if(MarcheInfo.dateDebut > MarcheInfo.dateFin){
+    //         return true
+    //     }
+    //     else if(new Date(MarcheInfo.dateDebut) < new Date() || new Date(MarcheInfo.dateFin) < new Date()){
+    //         return true
+    //     }
+    //     else{
+    //         return false
+    //     }
+    // }
 
-    if (IsEmpty()) {
-      setErrorMsg("Les champs * sont obligatoires !");
+    if (MarcheInfo.num === "") {
+      setErrorMsg("Le numéro du marché est obligatoire !");
     } 
     else if (IsNumMarcheExist()) {
       setErrorMsg("Ce numero du marché exist déja !");
     }
-    else if(IsincorrectDate()){
-      setErrorMsg("Date du marché invalide");
+    else if(resp === "" && id === 'Admin'){
+      setErrorMsg("Veuillez affecter ce marché a un responsable");
     } 
     else {
       setErrorMsg("");
 
-      ExistingData.marches.push({...MarcheInfo , num : MarcheInfo.num+numMarcheFormat});
+      if(id === 'Admin'){
 
-      axios
-        .put(`http://localhost:3001/users/${id}`, ExistingData)
-        .then((res) => {
-          setErrorMsg("");
-          Swal.fire({
-            icon: "success",
-            title: "Succès",
-            text: "Le marché est ajouté avec succès",
+        let responsable =""
+
+        if(Data !== 'load'){
+          responsable =  Data.find(ex=>ex.username === resp)
+          console.log(resp)
+        } 
+        
+
+        responsable.marches.push({...MarcheInfo , num : MarcheInfo.num});
+  
+        axios
+          .put(`http://localhost:3001/users/${responsable.id}`, responsable)
+          .then((res) => {
+            setErrorMsg("");
+            Swal.fire({
+              icon: "success",
+              title: "Succès",
+              text: "Le marché est ajouté avec succès",
+            });
           });
-        });
+      }
+      else{
+  
+        ExistingData.marches.push({...MarcheInfo , num : MarcheInfo.num});
+  
+        axios
+          .put(`http://localhost:3001/users/${id}`, ExistingData)
+          .then((res) => {
+            setErrorMsg("");
+            Swal.fire({
+              icon: "success",
+              title: "Succès",
+              text: "Le marché est ajouté avec succès",
+            });
+          });
+      }
     }
   };
 
@@ -115,24 +147,20 @@ export default function AddMarche() {
       <form onSubmit={handleAdd}>
         <h2>Ajouter un marché</h2>
         <h3 key={ErrorStyle} className="AddMarketError">{ErrorMsg}</h3>
+        
         <div className="AddCont">
           <div className="input-bx">
             <label className="title">Numero du marché *</label>
-            <div style={{display : 'flex' , alignItems : 'center'}}>
               <input
                 type="text"
-                style={{width : "50px"}}
-                // pattern="[0-9]{4}/bg/20[2-9]{2}"
                 name="num"
+                placeholder={`xxx/bg/${new Date().getFullYear()}`}
                 onChange={(e) => handleMarcheInfos(e)}
-                // placeholder="xxxx/bg/20xx"
               />
-              <span>/bg/{new Date().getFullYear()}</span>
-            </div>
           </div>
 
           <div className="input-bx">
-            <label className="title">Objet *</label>
+            <label className="title">Objet</label>
             <input
               type="text"
               name="objet"
@@ -141,24 +169,35 @@ export default function AddMarche() {
           </div>
 
           <div className="input-bx">
-            <label className="title">Date de début *</label>
+            <label className="title">Fournisseur</label>
             <input
-              type="date"
-              name="dateDebut"
-              onChange={(e) => handleMarcheInfos(e)}
-            />
-          </div>
-          <div className="input-bx">
-            <label className="title">Date fin *</label>
-            <input
-              type="date"
-              name="dateFin"
+              type="text"
+              name="fournisseur"
               onChange={(e) => handleMarcheInfos(e)}
             />
           </div>
 
           <div className="input-bx">
-            <label className="title">Théme *</label>
+            <label className="title">Delai</label>
+            <input
+              type="number"
+              name="delai"
+              placeholder="delai en mois"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+
+          <div className="input-bx">
+            <label className="title">Budget</label>
+            <input
+              type="text"
+              name="budget"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>          
+
+          <div className="input-bx">
+            <label className="title">Théme</label>
             <select
               name="theme"
               style={{ width : "97%" }}
@@ -172,7 +211,7 @@ export default function AddMarche() {
             </select>
           </div>
           <div className="input-bx">
-            <label className="title">Lieu *</label>
+            <label className="title">Lieu</label>
             <input
               type="text"
               name="lieu"
@@ -183,7 +222,7 @@ export default function AddMarche() {
           {
             MarcheInfo.theme !== "" &&
             <div className="input-bx">
-            <label className="title">Sous-théme *</label>
+            <label className="title">Sous-théme</label>
             {
               <select name="soustheme" style={{ width : "97%" }} onChange={(e) => handleMarcheInfos(e)}>
                 <option></option>
@@ -193,10 +232,82 @@ export default function AddMarche() {
           </div>
           }
 
-          <div className="btnContAdd">
+          <div className="input-bx">
+            <label className="title">Montant</label>
+            <input
+              type="number"
+              name="montant"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+          
+          <div className="input-bx">
+            <label className="title">Date approbation</label>
+            <input
+              type="date"
+              name="dateAprob"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+
+          <div className="input-bx">
+            <label className="title">Date ordre de service</label>
+            <input
+              type="date"
+              name="dateDebut"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+          
+          
+
+          {
+            id === "Admin" && 
+            <div className="input-bx">
+            <label className="title">Affecter un responsable *</label>
+            <select style={{ width : "97%" }} onChange={(e)=>setResp(e.target.value)}>
+              <option></option>
+              {
+                Data !== 'load' &&
+                Data.filter(dt=>dt.id !== 'Admin')
+                .map(dt=><option>{dt.username}</option>)
+              }
+            </select>
+          </div>
+          }
+
+          <div className="input-bx">
+            <label className="title">Date ouvrir du plie</label>
+            <input
+              type="date"
+              name="datePlie"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+
+          <div className="input-bx">
+            <label className="title">Date Rec provisoire</label>
+            <input
+              type="date"
+              name="dateRecProv"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+
+          <div className="input-bx">
+            <label className="title">Date Rec definitive</label>
+            <input
+              type="date"
+              name="dateRecDef"
+              onChange={(e) => handleMarcheInfos(e)}
+            />
+          </div>
+
+          
+        </div>
+        <div className="btnContAdd">
             <button>Ajouter le marché</button>
           </div>
-        </div>
       </form>
     </div>
   );

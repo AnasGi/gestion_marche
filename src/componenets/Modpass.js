@@ -2,24 +2,26 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import UseData from '../hooks/UserHook'
+import { useParams } from 'react-router-dom'
 
 export default function Modpass() {
 
     const data = UseData()
+    const {id} = useParams()
     
     const [newPass , setNewPass] = useState('')
     const [notice , setNotice] = useState('Nouveau mot de passe')
 
-    let admin = {}
+    let user = {}
     
     if(data !== 'load'){
-        admin = data.find(dt=>dt.id === 'Admin')
+        user = data.find(dt=>dt.id === id)
     } 
 
     function ModifyPassword(e){
         e.preventDefault()
         if(newPass !== ""){
-            axios.put('http://localhost:3001/users/Admin' , {...admin , password : newPass})
+            axios.put(`http://localhost:3001/users/${id}` , {...user , password : newPass})
             .then((res) => {
                 Swal.fire({
                   icon: "success",

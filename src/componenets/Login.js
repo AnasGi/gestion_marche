@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UseData from "../hooks/UserHook";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ErrorLogo from "../imgs/mark.png";
 import password_icon from "../Assets/password.png";
 import user_icon from "../Assets/person.png";
@@ -120,7 +120,6 @@ export default function LoginT() {
           )}
           <div className="btnCont">
             <button className="submit">Authentifier</button>
-            <Link to={"/signUp"}>Créer un compte</Link>
           </div>
         </div>
       </form>

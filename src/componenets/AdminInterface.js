@@ -19,7 +19,7 @@ export default function AdminInterface() {
 
   return (
     dt!=='load' && dt.filter(dt=>dt.id !== 'Admin').map(dt=>
-        <fieldset key={dt.id} className='carteField'>
+        <fieldset key={dt.id} className='carteField' style={{overflowY:"scroll" , height:"500px", overflowX:'hidden'}}>
           <legend id={dt.id}>
             <h1 style={{textTransform : 'capitalize'}}>
               <img className='formLogos' style={{paddingRight : '10px'}} src={userlogo} alt='user logo'/>

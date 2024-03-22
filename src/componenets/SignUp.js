@@ -226,7 +226,7 @@ export default function SignUp() {
           </div>
 
           <div className="btnCont">
-            <button className="submit">Créer un Compte</button>
+            <button className="submit">Ajouter un responsable</button>
           </div>
         </div>
       </form>

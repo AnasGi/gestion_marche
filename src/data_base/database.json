@@ -49,202 +49,73 @@
       ]
     },
     {
-      "id": "1",
-      "username": "user1",
-      "password": "1111",
-      "telephone": "",
-      "marches": [
-        {
-          "num": "275/bg/2024",
-          "objet": "ihadbj ezkacjba acvcjh zdvefvf efvefvefz  vef vze v zef vevevef",
-          "lieu": "Wilaya, Daoudiat, Marrakech",
-          "dateDebut": "2024-03-15",
-          "dateFin": "2024-05-15",
-          "theme": "kjbasc",
-          "soustheme": "zdacazdcva zdvaczdvzd zadvzdvzdvzd",
-          "orderArret": true,
-          "dateOrder": "15/3/2024"
-        }
-      ],
-      "taches": []
-    },
-    {
       "id": "2",
       "username": "user2",
-      "password": "azerty",
+      "password": "Anas123",
       "telephone": "0645766543",
       "marches": [
         {
-          "num": "987/bg/2024",
-          "objet": "kjbasjkbsaczchjcz jszczhas",
-          "lieu": "Wilaya, Daoudiat, Marrakech",
-          "dateDebut": "2024-04-01",
-          "dateFin": "2024-07-01",
-          "theme": "sxczaxaz",
-          "soustheme": "zacxz zaczc zac zaczza"
-        },
-        {
-          "num": "3242/bg/2024",
-          "objet": "aaaa",
+          "num": "1/bg/2024",
+          "objet": "test",
           "lieu": "kech",
-          "dateDebut": "2024-04-24",
-          "dateFin": "2024-05-23",
-          "theme": "Services professionnels",
-          "soustheme": "Services juridiques"
-        },
-        {
-          "num": "6567/bg/2025",
-          "objet": "menage salle",
-          "lieu": "marrakech, wilaya",
-          "dateDebut": "2024-03-20",
-          "dateFin": "2024-04-24",
+          "fournisseur": "hp",
+          "dateDebut": "2024-03-21",
+          "delai": "2",
           "theme": "Fournitures et équipements",
-          "soustheme": "Équipements informatiques et logiciels"
+          "soustheme": "Équipements informatiques et logiciels",
+          "montant": "100000",
+          "dateAprob": "2024-03-20",
+          "budget": "bg",
+          "dateRecProv": "2024-05-05",
+          "datePlie": "2024-03-07",
+          "dateRecDef": "2025-05-04"
         },
         {
-          "num": "2890/bg/2024",
-          "objet": "test time",
+          "num": "2/bg/2024",
+          "objet": "test",
           "lieu": "kech",
-          "dateDebut": "2024-03-10",
-          "dateFin": "2024-04-10",
-          "theme": "Infrastructure et construction",
-          "soustheme": "Construction de routes et autoroutes",
-          "orderArret": true,
-          "dateOrder": "15/3/2024"
-        },
-        {
-          "num": "9090/bg/2024",
-          "objet": "delai test",
-          "lieu": "jadida",
-          "dateDebut": "2024-03-10",
-          "dateFin": "2024-03-11",
-          "theme": "Services professionnels",
-          "soustheme": "Services juridiques"
-        },
-        {
-          "num": "1221/bg/2024",
-          "objet": "UYRYDT",
-          "lieu": "HGDTYCFDRGT",
-          "dateDebut": "2024-03-14",
-          "dateFin": "2024-04-05",
-          "theme": "Infrastructure et construction",
-          "soustheme": "Construction de bâtiments gouvernementaux",
-          "orderArret": false,
-          "dateOrder": "15/3/2024"
+          "fournisseur": "hp",
+          "dateDebut": "2024-03-21",
+          "delai": "2",
+          "theme": "Fournitures et équipements",
+          "soustheme": "Équipements informatiques et logiciels",
+          "montant": "100000",
+          "dateAprob": "2024-03-20",
+          "budget": "bg",
+          "dateRecProv": "2024-05-05",
+          "datePlie": "2024-03-07",
+          "dateRecDef": "2025-05-04"
         }
       ],
       "taches": [
         {
-          "taskId": 0.8605216850552286,
-          "task": "do somthing",
-          "taskDate": "March 17, 2024 4:26 PM",
-          "numMarche": "3242/bg/2024"
-        },
-        {
-          "taskId": 0.5608025381992998,
-          "task": "lol",
-          "taskDate": "March 17, 2024 4:30 PM",
-          "numMarche": "1221/bg/2024"
-        },
-        {
-          "taskId": 0.45817109727808814,
-          "task": "do homework",
-          "taskDate": "March 17, 2024 2:58 PM",
-          "numMarche": "1221/bg/2024"
-        },
-        {
-          "taskId": 0.15299274006875985,
-          "task": "imprimer",
-          "taskDate": "March 17, 2024 4:27 PM",
-          "numMarche": "987/bg/2024"
-        },
-        {
-          "taskId": 0.46389408562730083,
+          "tId": 0.5654494420193272,
           "task": "sdkjcb",
-          "taskDate": "March 17, 2024 4:27 PM",
-          "numMarche": "6567/bg/2025"
+          "taskDate": "March 21, 2024 10:39 PM",
+          "numMarche": "1/bg/2024",
+          "etat": "checked"
         },
         {
-          "taskId": 0.882624777758956,
+          "tId": 0.5418587544576365,
           "task": "dczdC",
-          "taskDate": "March 18, 2024 3:51 PM",
-          "numMarche": "3242/bg/2024"
+          "taskDate": "March 21, 2024 10:40 PM",
+          "numMarche": "1/bg/2024",
+          "etat": "checked"
         },
         {
-          "taskId": 0.31297116981919504,
-          "task": "anas",
-          "taskDate": "March 18, 2024 3:51 PM",
-          "numMarche": "3242/bg/2024"
-        },
-        {
-          "taskId": 0.5624795487579863,
-          "task": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "taskDate": "March 18, 2024 3:52 PM",
-          "numMarche": "3242/bg/2024"
-        },
-        {
-          "taskId": 0.3954244699264211,
-          "task": "sdkjcb",
-          "taskDate": "March 18, 2024 3:52 PM",
-          "numMarche": "3242/bg/2024"
-        },
-        {
-          "taskId": 0.12576376424421398,
+          "tId": 0.17131053552700903,
           "task": "do homework",
-          "taskDate": "March 18, 2024 3:52 PM",
-          "numMarche": "3242/bg/2024"
+          "taskDate": "March 21, 2024 10:43 PM",
+          "numMarche": "1/bg/2024",
+          "etat": "checked"
+        },
+        {
+          "taskId": 0.2967549607992044,
+          "task": "anas",
+          "taskDate": "Mar 22, 2024 12:15 AM",
+          "numMarche": "1/bg/2024"
         }
       ]
-    },
-    {
-      "id": "3",
-      "username": "user3",
-      "password": "0000",
-      "telephone": "",
-      "marches": [
-        {
-          "num": "435/bg/2024",
-          "objet": "kjbasjkbsaczchjcz jszczhas",
-          "lieu": "Wilaya, Daoudiat, Marrakech",
-          "dateDebut": "2024-04-01",
-          "dateFin": "2024-07-01",
-          "theme": "sxczaxaz",
-          "soustheme": "zacxz zaczc zac zaczza",
-          "orderArret": false
-        }
-      ],
-      "taches": []
-    },
-    {
-      "id": "70c2",
-      "username": "anass",
-      "password": "anasBmw1234",
-      "telephone": "0656557865",
-      "email": "nefodaf579@hisotyr.com",
-      "marches": [],
-      "taches": []
-    },
-    {
-      "id": "1f27",
-      "cin": "EE223443",
-      "username": "anass1",
-      "password": "AnTest098@",
-      "telephone": "0667788996",
-      "email": "",
-      "marches": [
-        {
-          "num": "3/bg/2024",
-          "objet": "jjkgsxvhxs",
-          "lieu": "kech",
-          "dateDebut": "2024-03-16",
-          "dateFin": "2024-03-22",
-          "theme": "Transport et logistique",
-          "soustheme": "Logistique et gestion des chaînes d'approvisionnement",
-          "orderArret": false,
-          "dateOrder": "4/3/2024"
-        }
-      ],
-      "taches": []
     }
   ]
 }

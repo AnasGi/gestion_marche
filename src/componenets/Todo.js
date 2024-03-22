@@ -7,6 +7,7 @@ import edit from "../imgs/edit.png";
 import dlt from "../imgs/delete.png";
 import ok from "../imgs/check.png";
 import add from "../imgs/addTask.png";
+import show from "../imgs/show.png";
 
 export default function Todo() {
   const { id } = useParams();
@@ -36,17 +37,15 @@ export default function Todo() {
 
   let taskId = Math.random(Math.floor(10000000000, 99999999999999));
   let date = moment();
-  let taskDate = date.format("LLL");
+  let taskDate = date.format("lll");
 
   const handleAjouter = (event) => {
     event.preventDefault();
     if (task === "") {
       setErrortask("La tache ne peut pas etre vide");
-    }
-    else if (numMarche === ""){
+    } else if (numMarche === "") {
       setErrortask("Veuillez choisir un marché.");
-    } 
-    else {
+    } else {
       setErrortask("");
       setTask("");
       setIsClick((prev) => !prev);
@@ -57,8 +56,8 @@ export default function Todo() {
           Swal.fire({
             icon: "success",
             title: "Tâche ajoutée avec succès",
-            showConfirmButton : false,
-            timer:1000
+            showConfirmButton: false,
+            timer: 1000,
           });
         });
     }
@@ -69,9 +68,8 @@ export default function Todo() {
 
     if (task === "") {
       setErrortask("La tache ne peut pas etre vide");
-    }
-    else if (numMarche === ""){
-      setErrortask("Veuillez choisir un marché."); 
+    } else if (numMarche === "") {
+      setErrortask("Veuillez choisir un marché.");
     } else {
       let elementToDlt = existingData.taches.find((ext) => ext.taskId === tId);
       let taskIndex = existingData.taches.indexOf(elementToDlt);
@@ -91,14 +89,14 @@ export default function Todo() {
           Swal.fire({
             icon: "success",
             title: "Tâche modifiée avec succès",
-            showConfirmButton : false,
-            timer:1000
+            showConfirmButton: false,
+            timer: 1000,
           });
         });
     }
   };
 
-  const handleSupprimer = (e, tId) => {
+  const handleSupprimer = (e, tId, task) => {
     e.preventDefault();
 
     Swal.fire({
@@ -116,7 +114,13 @@ export default function Todo() {
           (ext) => ext.taskId === tId
         );
         let taskIndex = existingData.taches.indexOf(elementToDlt);
-        existingData.taches.splice(taskIndex, 1);
+        existingData.taches.splice(taskIndex, 1, {
+          tId,
+          task,
+          taskDate,
+          numMarche,
+          etat: "checked",
+        });
         setIsClick((prev) => !prev);
 
         axios
@@ -144,77 +148,178 @@ export default function Todo() {
     });
   };
 
-  return (
-    <div className="todoCont">
-      <select onChange={(e) => setNumMarche(e.target.value)} className="select-box" disabled={isModified ? true : false}>
-        <option hidden value="">Choisir un marché</option>
-        {existingData.marches !== undefined &&
-          existingData.marches.map((exdata) => <option>{exdata.num}</option>)}
-      </select>
-      
-      <h3 className="msg" key={errortask}>
-        {errortask}
-      </h3>
+  let i = 0;
+  function ShowMenu() {
+    if (i === 0) {
+      document.getElementsByClassName("taskMenu")[0].style.width = "50%";
+      document.getElementsByClassName("taskMenu")[0].style.padding =
+        "20px 10px";
+      i++;
+    } else {
+      document.getElementsByClassName("taskMenu")[0].style.width = "0%";
+      document.getElementsByClassName("taskMenu")[0].style.padding = "0px";
+      i = 0;
+    }
+  }
 
-      <div key={isClick}>
-        {
-          numMarche === "" ?
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <div className="taskMenu">
+        {existingData.taches !== undefined &&
+          existingData.marches.map((mar) => (
+            <div>
+              <select
+                onChange={(e) => setNumMarche(e.target.value)}
+                className="select-box"
+                disabled={isModified ? true : false}
+              >
+                <option hidden value="">
+                  Choisir un marché
+                </option>
+                {existingData.marches !== undefined &&
+                  existingData.marches.map((exdata) => (
+                    <option>{exdata.num}</option>
+                  ))}
+              </select>
+              <h3>Historique</h3>
+              <details key={mar.num}>
+                <summary
+                  className="MarketInfoSummary"
+                  style={{ padding: "10px 5px" }}
+                >
+                  <span>
+                    {mar.num}
+                    <span className="stats">
+                      {
+                        existingData.taches.filter(
+                          (tch) => tch.numMarche === mar.num && tch.etat
+                        ).length
+                      }
+                    </span>
+                  </span>
+                </summary>
+
+                {existingData.taches.filter((tch) => tch.numMarche === mar.num)
+                  .length !== 0 ? (
+                  existingData.taches
+                    .filter((tch) => tch.numMarche === mar.num)
+                    .map(
+                      (tache) =>
+                        tache.etat && (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around",
+                              alignItems: "center",
+                            }}
+                          >
+                            <p
+                              style={{
+                                wordBreak: "break-word",
+                                width: "60%",
+                                padding: "0px 5px",
+                              }}
+                            >
+                              {tache.task}
+                            </p>
+                            <p>{tache.taskDate}</p>
+                          </div>
+                        )
+                    )
+                ) : (
+                  <div
+                    style={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <p>Pas de taches</p>
+                  </div>
+                )}
+              </details>
+            </div>
+          ))}
+      </div>
+      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+        <img
+          style={{ paddingLeft: "10px" }}
+          onClick={ShowMenu}
+          className="formLogos"
+          src={show}
+          alt="afficher menu"
+          title="afficher le menu"
+        />
+      </div>
+      <div style={{width:'100%' ,display:"flex" , justifyContent:"center"}}>
+      <div className="todoCont">
+        <h3 className="msg" key={errortask}>
+          {errortask}
+        </h3>
+
+        <div key={isClick}>
+          {numMarche === "" ? (
             <p
               style={{
-                  textAlign: "center",
-                  fontSize: "18px",
-                  color: "#555",
-                  fontStyle: "italic",
-                  marginTop: "20px",
-                }}
-              >
-                Veuillez choisir un marché.
+                textAlign: "center",
+                fontSize: "18px",
+                color: "#555",
+                fontStyle: "italic",
+                marginTop: "20px",
+              }}
+            >
+              Veuillez choisir un marché.
             </p>
-          :
-          (existingData.taches !== undefined) && 
-          (
-            (existingData.taches.filter((exdt) => exdt.numMarche === numMarche).length !== 0) 
-            ?
-            (
+          ) : (
+            existingData.taches !== undefined &&
+            (existingData.taches.filter((exdt) => exdt.numMarche === numMarche)
+              .length !== 0 ? (
               existingData.taches
-              .filter((exdt) => exdt.numMarche === numMarche)
-              .map((tache, i) => {
-                const { taskId, task, taskDate } = tache;
-                return (
-                  <div className="taskCont" key={i}>
-                    <form id={taskId} onSubmit={(e) => handleUpdate(e, taskId)}>
-                      <p>{task}</p>
-                    </form>
-                    <div className="TodoBtnCont">
-                      <div>
-                        <button
-                          className="mod"
-                          onClick={() => {
-                            setIsModified(true);
-                            setTask(task);
-                            setTid(taskId);
-                          }}
+                .filter((exdt) => exdt.numMarche === numMarche)
+                .map((tache, i) => {
+                  const { taskId, task, taskDate, etat } = tache;
+                  return (
+                    !etat && (
+                      <div className="taskCont" key={i}>
+                        <form
+                          id={taskId}
+                          onSubmit={(e) => handleUpdate(e, taskId)}
                         >
-                          <img src={edit} alt="modifier" />
-                        </button>
+                          <p>{task}</p>
+                        </form>
+                        <div className="TodoBtnCont">
+                          <div>
+                            <button
+                              className="mod"
+                              onClick={() => {
+                                setIsModified(true);
+                                setTask(task);
+                                setTid(taskId);
+                              }}
+                            >
+                              <img src={edit} alt="modifier" />
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              className="dlt"
+                              onClick={(e) => handleSupprimer(e, taskId, task)}
+                              disabled={isModified ? true : false}
+                            >
+                              <img src={dlt} alt="supprimer" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div>{taskDate}</div>
                       </div>
-                      <div>
-                        <button
-                          className="dlt"
-                          onClick={(e) => handleSupprimer(e, taskId)}
-                          disabled={isModified ? true : false}
-                        >
-                          <img src={dlt} alt="supprimer" />
-                        </button>
-                      </div>
-                    </div>
-                    <div>{taskDate}</div>
-                  </div>
-                );
-              })
-            ) 
-            : 
-            (
+                    )
+                  );
+                })
+            ) : (
               <p
                 style={{
                   textAlign: "center",
@@ -226,39 +331,40 @@ export default function Todo() {
               >
                 Aucune tâche disponible pour ce marché.
               </p>
-            )
-          )
-        }
-      </div>
-
-      <form>
-        <div>
-          <input
-            type="text"
-            className="inputTask"
-            name="task"
-            value={task}
-            placeholder="Saisir une tache"
-            onChange={(e) => setTask(e.target.value)}
-          />
-        </div>
-        <div>
-          {isModified ? (
-            <button className="confirm" onClick={(e) => handleUpdate(e, tid)}>
-              <img src={ok} alt="confirm modfification" />
-            </button>
-          ) : (
-            <button style={{border:'none'}} onClick={handleAjouter}>
-              <img
-                className="AddTaskImg"
-                src={add}
-                alt="Ajouter cette tache"
-                title="Ajouter cette tache"
-              />
-            </button>
+            ))
           )}
         </div>
-      </form>
+
+        <form>
+          <div>
+            <input
+              type="text"
+              className="inputTask"
+              name="task"
+              value={task}
+              placeholder="Saisir une tache"
+              onChange={(e) => setTask(e.target.value)}
+            />
+          </div>
+          <div>
+            {isModified ? (
+              <button className="confirm" onClick={(e) => handleUpdate(e, tid)}>
+                <img src={ok} alt="confirm modfification" />
+              </button>
+            ) : (
+              <button style={{ border: "none" , display:"flex" }} onClick={handleAjouter}>
+                <img
+                  className="AddTaskImg"
+                  src={add}
+                  alt="Ajouter cette tache"
+                  title="Ajouter cette tache"
+                />
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
+      </div>
     </div>
   );
 }

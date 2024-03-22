@@ -6,6 +6,7 @@ import AddMarche from './componenets/AddMarche';
 import Todo from './componenets/Todo';
 import WorkerInfo from './componenets/WorkerInfo';
 import SignUp  from './componenets/SignUp'
+import MarchesTable from './componenets/MarchesTable';
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
         <Route path='/AddMarche/:id/:securityKey' element={<AddMarche />} />
         <Route path='/Todo/:id/:securityKey' element={<Todo/>} />
         <Route path='/signUp' element={<SignUp/>} />
+        <Route path='/MarchesTable' element={<MarchesTable/>} />
       </Routes>
     </div>
   );

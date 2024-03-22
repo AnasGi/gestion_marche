@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import UseData from "../hooks/UserHook";
 import { useNavigate } from "react-router-dom";
-import userlogo from "../imgs/person.png";
-import clock from "../imgs/clock.png";
-import moment from "moment";
+import userlogo from "../imgs/resp.png";
 import AdminLogo from "../imgs/Admin.png";
+import add from "../imgs/add.png";
 import Modpass from "./Modpass";
 import SecurityKey from "../SecurityKey";
 
@@ -41,18 +40,16 @@ export default function Header({ isAdmin }) {
 
   return (
     <header>
-      {isAdmin === "Admin" && (
-        <div className="AdminIcon">
-          <img
-            style={{ width: "50px", height: "50px" }}
-            onClick={() => setIsMod((prev) => !prev)}
-            src={AdminLogo}
-            alt="Admin logo"
-            title="Clicker pour modifier mot de passe"
-          />
-          {isMod && <Modpass />}
-        </div>
-      )}
+      <div className="UserIcon">
+        <img
+          style={{ width: "50px", height: "50px" }}
+          onClick={() => setIsMod((prev) => !prev)}
+          src={isAdmin === "Admin" ? AdminLogo : userlogo}
+          alt="logo"
+          title="Clicker pour modifier mot de passe"
+        />
+        {isMod && <Modpass />}
+      </div>
       <div
         style={{
           display: "flex",
@@ -61,10 +58,12 @@ export default function Header({ isAdmin }) {
         }}
       >
         {isAdmin === "Admin" ? (
-          <div>
+          <div className="outilsAdmin">
             <div>
-              <details className="respons" >
-                <summary>Les résponsables</summary>
+              <details className="respons">
+                <summary>
+                  <span className="stats">{nbreUsers}</span> Les résponsables
+                </summary>
                 <div>
                   {data !== "load" &&
                     data
@@ -72,77 +71,69 @@ export default function Header({ isAdmin }) {
                       .map((dt) => <a href={`#${dt.id}`}>{dt.username}</a>)}
                 </div>
               </details>
+              <p>
+                <img
+                  style={{ verticalAlign: "middle" }}
+                  onClick={() => navigate(`/signUp`)}
+                  className="formLogos"
+                  src={add}
+                  alt=""
+                  title="ajouter un responsable"
+                />
+              </p>
             </div>
 
-            <p>
-              <span className="stats">{nbreUsers}</span> responsables
-            </p>
-            <p>
-              <span className="stats">{marchesNumber}</span> marchés
-            </p>
-          </div>
-        ) : (
-          <div style={{ gap: "70px" }}>
             <div>
-              <img
-                src={userlogo}
-                style={{ width: "50px", height: "50px" }}
-                alt="user logo"
-              />
-              {data !== "load" &&
-                data
-                  .filter((dt) => dt.id === isAdmin)
-                  .map((dt) => (
-                    <div>
-                      <span style={{ display: "block" }}>{dt.username}</span>
-                      <span style={{ display: "block" }}>{dt.telephone}</span>
-                    </div>
-                  ))}
-            </div>
-            <p>
-              <span className="stats">{nbreUserMarkets}</span> marchés
-            </p>
-            <div className="actions">
-              <div>
-                <button
-                  onClick={() => navigate(`/Todo/${UserData[0].id}/${token}`)}
-                >
-                  liste des taches
-                </button>
-              </div>
-              <div>
-                <button
+              <span className="stats">{marchesNumber}</span> marchés
+              <span>
+                <img
+                  style={{ verticalAlign: "middle" }}
                   onClick={() =>
                     navigate(`/AddMarche/${UserData[0].id}/${token}`)
                   }
-                >
-                  Ajouter un marché
-                </button>
-              </div>
+                  className="formLogos"
+                  src={add}
+                  alt=""
+                  title="ajouter un marché"
+                />
+              </span>
+            </div>
+            <div>
+              <button onClick={()=>navigate('/MarchesTable')}>Tous les marchés</button>
+            </div>
+          </div>
+        ) : (
+          <div className="outilsResp">
+            <div>
+              <span className="stats">{nbreUserMarkets}</span> marchés
+              <img
+                style={{ verticalAlign: "middle" }}
+                onClick={() =>
+                  navigate(`/AddMarche/${UserData[0].id}/${token}`)
+                }
+                className="formLogos"
+                src={add}
+                alt=""
+                title="ajouter un marché"
+              />
+            </div>
+            <div>
+              <button
+                onClick={() => navigate(`/Todo/${UserData[0].id}/${token}`)}
+                className="btnAddMarche"
+              >
+                Liste des taches
+              </button>
             </div>
           </div>
         )}
       </div>
-      <p
-        style={{
-          padding: "10px",
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <img
-          src={clock}
-          alt="horloge"
-          style={{ width: "40px", height: "40px" }}
-        />
-        <span>{moment().format("LLL")}</span>
-      </p>
+
       <div>
         <button
           className="btnAddMarche"
           onClick={() => navigate("/", { replace: true })}
-          style={{ backgroundColor: "red" , width:"150px"}}
+          style={{ backgroundColor: "red", width: "150px" }}
         >
           Deconnexion
         </button>
