@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import Swal from "sweetalert2";
 import edit from "../imgs/edit.png";
@@ -8,6 +8,8 @@ import dlt from "../imgs/delete.png";
 import ok from "../imgs/check.png";
 import add from "../imgs/addTask.png";
 import show from "../imgs/show.png";
+import { useSelector } from "react-redux";
+import SecurityKey from "../SecurityKey";
 
 export default function Todo() {
   const { id } = useParams();
@@ -18,6 +20,9 @@ export default function Todo() {
   const [isClick, setIsClick] = useState(false);
   const [isModified, setIsModified] = useState(false);
   const [numMarche, setNumMarche] = useState("");
+
+  const log = useSelector(data=>data.IsLogedIn)
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
@@ -35,7 +40,7 @@ export default function Todo() {
     };
   });
 
-  let taskId = Math.random(Math.floor(10000000000, 99999999999999));
+  let taskId = SecurityKey(32);
   let date = moment();
   let taskDate = date.format("lll");
 
@@ -73,12 +78,7 @@ export default function Todo() {
     } else {
       let elementToDlt = existingData.taches.find((ext) => ext.taskId === tId);
       let taskIndex = existingData.taches.indexOf(elementToDlt);
-      existingData.taches.splice(taskIndex, 1, {
-        taskId,
-        task,
-        taskDate,
-        numMarche,
-      });
+      existingData.taches.splice(taskIndex, 1, {...elementToDlt , task , taskDate});
       setIsClick((prev) => !prev);
       setIsModified(false);
       setTask("");
@@ -106,7 +106,7 @@ export default function Todo() {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Oui, supprimer",
+      confirmButtonText: "Confirmer",
       cancelButtonText: "Annuler",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -114,13 +114,7 @@ export default function Todo() {
           (ext) => ext.taskId === tId
         );
         let taskIndex = existingData.taches.indexOf(elementToDlt);
-        existingData.taches.splice(taskIndex, 1, {
-          tId,
-          task,
-          taskDate,
-          numMarche,
-          etat: "checked",
-        });
+        existingData.taches.splice(taskIndex, 1, {...elementToDlt ,etat: "checked",});
         setIsClick((prev) => !prev);
 
         axios
@@ -163,6 +157,7 @@ export default function Todo() {
   }
 
   return (
+  log ?
     <div
       style={{
         display: "flex",
@@ -172,10 +167,7 @@ export default function Todo() {
       }}
     >
       <div className="taskMenu">
-        {existingData.taches !== undefined &&
-          existingData.marches.map((mar) => (
-            <div>
-              <select
+      <select
                 onChange={(e) => setNumMarche(e.target.value)}
                 className="select-box"
                 disabled={isModified ? true : false}
@@ -184,11 +176,15 @@ export default function Todo() {
                   Choisir un marché
                 </option>
                 {existingData.marches !== undefined &&
-                  existingData.marches.map((exdata) => (
-                    <option>{exdata.num}</option>
+                  existingData.marches.map((exdata ,i) => (
+                    <option key={i}>{exdata.num}</option>
                   ))}
               </select>
               <h3>Historique</h3>
+        {existingData.taches !== undefined &&
+          existingData.marches.map((mar ,i) => (
+            <div key={i}>
+              
               <details key={mar.num}>
                 <summary
                   className="MarketInfoSummary"
@@ -211,9 +207,10 @@ export default function Todo() {
                   existingData.taches
                     .filter((tch) => tch.numMarche === mar.num)
                     .map(
-                      (tache) =>
+                      (tache , i) =>
                         tache.etat && (
                           <div
+                            key={i}
                             style={{
                               display: "flex",
                               justifyContent: "space-around",
@@ -335,7 +332,7 @@ export default function Todo() {
           )}
         </div>
 
-        <form>
+        <form name="taskForm">
           <div>
             <input
               type="text"
@@ -366,5 +363,7 @@ export default function Todo() {
       </div>
       </div>
     </div>
+  :
+  navigate('/')
   );
 }

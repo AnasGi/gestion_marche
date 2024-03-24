@@ -1,24 +1,36 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Login from './componenets/Login';
-import Home from './componenets/Home';
-import AddMarche from './componenets/AddMarche';
-import Todo from './componenets/Todo';
-import WorkerInfo from './componenets/WorkerInfo';
-import SignUp  from './componenets/SignUp'
-import MarchesTable from './componenets/MarchesTable';
+import Login from './components/Login';
+import Home from './components/Home';
+import AddMarche from './components/AddMarche';
+import Todo from './components/Todo';
+import WorkerInfo from './components/WorkerInfo';
+import SignUp  from './components/SignUp'
+import MarchesTable from './components/MarchesTable';
+import { useDispatch } from 'react-redux';
+
 function App() {
+  const dispatch = useDispatch()
+  //prevent the change of reducer state when the page is refreshed
+  const perfEntries = performance.getEntriesByType('navigation');
+  if (perfEntries.length > 0) {
+    const navigationEntry = perfEntries[0];
+    if (navigationEntry.type === 'reload') {
+      dispatch({type : "logedIn"})
+    }
+  }
+
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/Add' element={<AddMarche />} />
-        <Route path='/home/:id/:securityKey' element={<Home />} />
-        <Route path='/WorkerInfo/:worker/:securityKey' element={<WorkerInfo />} />
-        <Route path='/AddMarche/:id/:securityKey' element={<AddMarche />} />
-        <Route path='/Todo/:id/:securityKey' element={<Todo/>} />
-        <Route path='/signUp' element={<SignUp/>} />
-        <Route path='/MarchesTable' element={<MarchesTable/>} />
+        <Route path='/home/:id/' element={<Home />} />
+        <Route path='/InfosResponsable/:worker/' element={<WorkerInfo />} />
+        <Route path='/AjouterMarché/:id/' element={<AddMarche />} />
+        <Route path='/ListDesTache/:id/' element={<Todo/>} />
+        <Route path='/AjouterResponsable/' element={<SignUp/>} />
+        <Route path='/TousLesMarchés/' element={<MarchesTable/>} />
       </Routes>
     </div>
   );

@@ -4,16 +4,15 @@ import { useNavigate } from "react-router-dom";
 import userlogo from "../imgs/resp.png";
 import AdminLogo from "../imgs/Admin.png";
 import add from "../imgs/add.png";
+import list from "../imgs/list.png";
 import Modpass from "./Modpass";
-import SecurityKey from "../SecurityKey";
+import { useDispatch } from "react-redux";
+
 
 export default function Header({ isAdmin }) {
   const data = UseData();
-
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-
-  const token = SecurityKey(32);
-
   let UserData = [];
 
   if (data !== "load") {
@@ -31,7 +30,7 @@ export default function Header({ isAdmin }) {
       .filter((dt) => dt.id !== "Admin")
       .map((data) => (marchesNumber += data.marches.length));
 
-    data
+    isAdmin !== "Admin" && data
       .filter((dt) => dt.id === isAdmin)
       .map((data) => (nbreUserMarkets += data.marches.length));
 
@@ -68,13 +67,13 @@ export default function Header({ isAdmin }) {
                   {data !== "load" &&
                     data
                       .filter((dt) => dt.id !== "Admin")
-                      .map((dt) => <a href={`#${dt.id}`}>{dt.username}</a>)}
+                      .map((dt,i) => <a key={i} href={`#${dt.id}`}>{dt.username}</a>)}
                 </div>
               </details>
               <p>
                 <img
                   style={{ verticalAlign: "middle" }}
-                  onClick={() => navigate(`/signUp`)}
+                  onClick={() => navigate(`/AjouterResponsable/`)}
                   className="formLogos"
                   src={add}
                   alt=""
@@ -89,7 +88,7 @@ export default function Header({ isAdmin }) {
                 <img
                   style={{ verticalAlign: "middle" }}
                   onClick={() =>
-                    navigate(`/AddMarche/${UserData[0].id}/${token}`)
+                    navigate(`/AjouterMarché/${UserData[0].id}/`)
                   }
                   className="formLogos"
                   src={add}
@@ -99,7 +98,7 @@ export default function Header({ isAdmin }) {
               </span>
             </div>
             <div>
-              <button onClick={()=>navigate('/MarchesTable')}>Tous les marchés</button>
+              <button onClick={()=>navigate(`/TousLesMarchés/`)}>Tous les marchés</button>
             </div>
           </div>
         ) : (
@@ -109,7 +108,7 @@ export default function Header({ isAdmin }) {
               <img
                 style={{ verticalAlign: "middle" }}
                 onClick={() =>
-                  navigate(`/AddMarche/${UserData[0].id}/${token}`)
+                  navigate(`/AjouterMarché/${UserData[0].id}/`)
                 }
                 className="formLogos"
                 src={add}
@@ -117,13 +116,9 @@ export default function Header({ isAdmin }) {
                 title="ajouter un marché"
               />
             </div>
-            <div>
-              <button
-                onClick={() => navigate(`/Todo/${UserData[0].id}/${token}`)}
-                className="btnAddMarche"
-              >
-                Liste des taches
-              </button>
+            <div style={{cursor:"pointer"}} onClick={() => navigate(`/ListDesTache/${UserData[0].id}`)}>
+              <p>Liste des taches</p>
+              <img className="formLogos" src={list} alt=""/>
             </div>
           </div>
         )}
@@ -132,7 +127,7 @@ export default function Header({ isAdmin }) {
       <div>
         <button
           className="btnAddMarche"
-          onClick={() => navigate("/", { replace: true })}
+          onClick={() => {navigate("/", { replace: true }) ; dispatch({type : "logedOut"})}}
           style={{ backgroundColor: "red", width: "150px" }}
         >
           Deconnexion
