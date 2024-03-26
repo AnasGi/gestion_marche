@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import UseData from "../hooks/UserHook";
 import { useParams , useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import add from "../imgs/add.png";
 import { useSelector } from "react-redux";
 
 export default function AddMarche() {
@@ -19,9 +18,8 @@ export default function AddMarche() {
     lieu: "",
     dateDebut: "",
     delai: 0,
-    theme: "",
-    soustheme: "",
     montant: 0,
+    decomptes : [],
     dateAprob: "",
     budget: "",
     dateRecProv: "",
@@ -36,11 +34,9 @@ export default function AddMarche() {
     ]
   });
   const [ExistingData, setExistingData] = useState({});
-  const [existTheme, setExistTheme] = useState([]);
   const [ErrorMsg, setErrorMsg] = useState("");
   const [ErrorStyle, setErroStyle] = useState(false);
   const [resp, setResp] = useState("");
-  const [refresh, setRefresh] = useState(false);
 
   function handleMarcheInfos(e) {
     e.preventDefault();
@@ -48,30 +44,18 @@ export default function AddMarche() {
     setMarcheInfo({ ...MarcheInfo, [e.target.name]: e.target.value });
   }
 
+  //Getting the existing data
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get('http://localhost:3001/themes')
-        .then((res) => setExistTheme(res.data));
+      .get(`http://localhost:3001/users/${id}`)
+      .then((res) => setExistingData(res.data));
     };
     fetchData();
     const intervalId = setInterval(fetchData, 5000);
     return () => clearInterval(intervalId);
-  }, []);
-
-  function getSousThemes() {
-    if (MarcheInfo.theme !== "") {
-      let d = existTheme.find((th) => th.theme === MarcheInfo.theme);
-      return d.soustheme.map((sth, i) => <option key={i}>{sth}</option>);
-    }
-  }
-
-  //Getting the existing data
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/users/${id}`)
-      .then((res) => setExistingData(res.data));
   }, [id]);
+
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -132,43 +116,6 @@ export default function AddMarche() {
     }
   };
 
-  function AddTheme() {
-    Swal.fire({
-      title: "Entrez un nouveau theme",
-      html: `
-        <input id="swal-input1" class="swal2-input" placeholder="Theme">
-        <input id="swal-input2" class="swal2-input" placeholder="Sous-theme correspondant">
-      `,
-      showCancelButton: true,
-      confirmButtonText: "Valider",
-      cancelButtonText: "Annuler",
-      preConfirm: () => {
-        return [
-          document.getElementById("swal-input1").value,
-          document.getElementById("swal-input2").value,
-        ];
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const [value1, value2] = result.value;
-        axios
-          .post("http://localhost:3001/themes", {
-            theme: value1,
-            soustheme: [value2],
-          })
-          .then((res) => {
-            setRefresh((prev) => !prev);
-            Swal.fire({
-              icon: "success",
-              title: "Theme ajouté avec succès",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          });
-      }
-    });
-  }
-
   return (
     log ?
       <div className="AddContainer">
@@ -228,52 +175,6 @@ export default function AddMarche() {
                   <option>INDH</option>
               </select>
             </div>
-
-            <div className="input-bx" key={refresh}>
-              <label className="title">
-                Théme
-                <img
-                  style={{ height: "20px", width: "20px" }}
-                  onClick={AddTheme}
-                  className="formLogos"
-                  src={add}
-                  alt=""
-                />
-              </label>
-              <select
-                name="theme"
-                style={{ width: "97%" }}
-                onChange={(e) => handleMarcheInfos(e)}
-              >
-                <option></option>
-                {existTheme !== undefined &&
-                  existTheme.map((th, i) => <option key={i}>{th.theme}</option>)}
-              </select>
-            </div>
-            <div className="input-bx">
-              <label className="title">Lieu</label>
-              <input
-                type="text"
-                name="lieu"
-                onChange={(e) => handleMarcheInfos(e)}
-              />
-            </div>
-
-            {MarcheInfo.theme !== "" && (
-              <div className="input-bx">
-                <label className="title">Sous-théme</label>
-                {
-                  <select
-                    name="soustheme"
-                    style={{ width: "97%" }}
-                    onChange={(e) => handleMarcheInfos(e)}
-                  >
-                    <option></option>
-                    {getSousThemes()}
-                  </select>
-                }
-              </div>
-            )}
 
             <div className="input-bx">
               <label className="title">Montant</label>

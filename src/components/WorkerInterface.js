@@ -23,7 +23,7 @@ export default function WorkerInterface(props) {
         ) : (
           <div style={{ marginBottom: "120px" , textAlign : "center"}}>
             <img style={{width : '50px' , height : '50px'}} src={noMarches} alt="aucun marché"/>
-            <p style={{ textAlign: "center" }}>Vous suivez aucun marchés</p>
+            <p style={{ textAlign: "center" }}>Aucun marchés à suivre pour le moment !</p>
           </div>
         )}
       </fieldset>

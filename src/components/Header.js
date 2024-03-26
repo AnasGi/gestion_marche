@@ -98,7 +98,7 @@ export default function Header({ isAdmin }) {
               </span>
             </div>
             <div>
-              <button onClick={()=>navigate(`/TousLesMarchés/`)}>Tous les marchés</button>
+              <button className="btnAllMarkets" onClick={()=>navigate(`/TousLesMarchés/`)}>Tous les marchés</button>
             </div>
           </div>
         ) : (

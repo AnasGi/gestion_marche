@@ -9,7 +9,7 @@ import tele_icon from "../Assets/tele.png";
 import ErrorLogo from "../imgs/mark.png";
 import CIN from "../Assets/cin.png";
 import mark from "../imgs/mark.png";
-import generate from "../imgs/loop.png";
+import generate from "../imgs/generate.png";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
