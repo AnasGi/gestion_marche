@@ -792,9 +792,9 @@ header details > summary {
   width: 95%;
 }
 
-
-.marches-table tbody tr:hover {
-  background-color: #e0e0e0;
+.cellSize {
+  width: 150px;
+  word-break: break-word;
 }
 
 .printHeader{
@@ -888,6 +888,11 @@ header details > summary {
 
   .no-print {
     display: none;
+  }
+  
+  .marches-table{
+    width: 100%;
+    overflow: visible;
   }
   
   .marches-table textarea {

@@ -166,7 +166,7 @@ export default function MarchesTable() {
             <th>
               <textarea rows={2} disabled value={"Numéro"} />
             </th>
-            <th>
+            <th >
               <textarea rows={2} disabled value={"Objet"} />
             </th>
             <th>
@@ -205,10 +205,10 @@ export default function MarchesTable() {
             return Filterer(marchesToRender).map((marche, index) => (
               <tr key={index}>
                 <td>{marche.num}</td>
-                <td>{marche.objet}</td>
+                <td className="cellSize">{marche.objet}</td>
                 <td>{marche.fournisseur}</td>
                 <td>{marche.montant} Dhs</td>
-                <td style={{padding:""}}>
+                <td  className="cellSize">
                     {marche.decomptes.map((deco , i)=>
                       <td className="decomptesMarcheTd" key={i}>
                         {deco.decompte}

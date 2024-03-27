@@ -91,7 +91,7 @@ export default function CarteMarche({ marches, id }) {
     if (orders[orders.length - 1].order === "arret") {
       timepassed =
         (new Date(orders[orders.length - 1].dateOrder) - new Date(debut)) /
-        (1000 * 3600 * 24); //temps passé
+          (1000 * 3600 * 24); //temps passé
     } else if (orders[orders.length - 1].order === "reprise") {
       timepassed =
         (new Date(orders[orders.length - 2].dateOrder) -
@@ -150,8 +150,69 @@ export default function CarteMarche({ marches, id }) {
   return marches.map((marche, i) => (
     <div key={i}>
       <div className="MarcheCont">
+        <div
+          style={{
+            width: "40%",
+          }}
+        >
+          <div>
+            {new Date(marche.dateDebut) <= Date.now() ? (
+              MarketTime(marche.dateDebut, marche.delai, marche.ordres).up ? (
+                <p
+                  className="stats"
+                  style={{
+                    fontWeight: "bold",
+                    color: "red",
+                    borderRadius: "10px",
+                  }}
+                >
+                  Le delai est depassé de{" "}
+                  {
+                    MarketTime(marche.dateDebut, marche.delai, marche.ordres)
+                      .time
+                  }{" "}
+                  jour(s)
+                  <img
+                    onClick={() => DeleteMarche(marche.num)}
+                    className="dlt"
+                    style={{
+                      height: "20px",
+                      padding: "5px",
+                      verticalAlign: "middle",
+                      marginLeft: "10px",
+                    }}
+                    src={delM}
+                    alt="suprrimer marché"
+                    title="Supprimer ce marché"
+                  />
+                </p>
+              ) : (
+                <p
+                  className="stats"
+                  style={{ fontWeight: "bold", borderRadius: "10px" }}
+                >
+                  {
+                    MarketTime(marche.dateDebut, marche.delai, marche.ordres)
+                      .time
+                  }{" "}
+                  Jour(s) passé(s)
+                </p>
+              )
+            ) : (
+              <div>
+                <p
+                  className="stats"
+                  style={{ fontWeight: "bold", borderRadius: "10px" }}
+                >
+                  Pas encore commencé
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+        <hr style={{ margin: "20px 0px" }} />
         <div className="marketInfos">
-          <div style={{ width: "50%" }}>
+          <div style={{ width: "60%" }}>
             <p>
               <span>N° marché : </span>
               {marche.num}
@@ -168,7 +229,7 @@ export default function CarteMarche({ marches, id }) {
             </p>
           </div>
 
-          <div style={{ width: "40%", position: "relative" }}>
+          <div style={{ width: "30%", position: "relative" }}>
             <p>
               <span>Montant : </span>
               {marche.montant} dh
@@ -262,59 +323,7 @@ export default function CarteMarche({ marches, id }) {
           </div>
         </div>
 
-        <div
-          style={{
-            border: "1px solid",
-            padding: "5px",
-            textAlign: "center",
-            width: "30%",
-          }}
-        >
-          {new Date(marche.dateDebut) <= Date.now() ? (
-            MarketTime(marche.dateDebut, marche.delai, marche.ordres).up ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "10px",
-                }}
-              >
-                <p style={{ color: "red", fontWeight: "bold" }}>
-                  Le delai est depassé de{" "}
-                  {
-                    MarketTime(marche.dateDebut, marche.delai, marche.ordres)
-                      .time
-                  }{" "}
-                  jour(s)
-                </p>
-                <img
-                  onClick={() => DeleteMarche(marche.num)}
-                  className="dlt"
-                  style={{ height: "20px", padding: "5px" }}
-                  src={delM}
-                  alt="suprrimer marché"
-                />
-              </div>
-            ) : (
-              <p>
-                <span style={{ paddingLeft: "5px", fontWeight: "bold" }}>
-                  {
-                    MarketTime(marche.dateDebut, marche.delai, marche.ordres)
-                      .time
-                  }{" "}
-                  Jour(s) passé(s)
-                </span>
-              </p>
-            )
-          ) : (
-            <div>
-              <p style={{ fontWeight: "bold" }}>Pas encore commencé</p>
-            </div>
-          )}
-        </div>
-
-        <hr style={{ margin: "30px 0px" }} />
+        <hr style={{ margin: "20px 0px" }} />
 
         <div className="marketDates">
           <fieldset>
