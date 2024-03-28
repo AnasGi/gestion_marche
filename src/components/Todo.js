@@ -26,7 +26,7 @@ export default function Todo() {
 
   useEffect(() => {
     axios
-      .get(`http://192.168.1.68:3000/users/${id}`)
+      .get(`http://192.168.1.68:3001/users/${id}`)
       .then((res) => setExistingData(res.data));
   }, [id]);
 
@@ -56,7 +56,7 @@ export default function Todo() {
       setIsClick((prev) => !prev);
       existingData.taches.push({ taskId, task, taskDate, numMarche });
       axios
-        .put(`http://192.168.1.68:3000/users/${id}`, existingData)
+        .put(`http://192.168.1.68:3001/users/${id}`, existingData)
         .then((res) => {
           Swal.fire({
             icon: "success",
@@ -84,7 +84,7 @@ export default function Todo() {
       setTask("");
 
       axios
-        .put(`http://192.168.1.68:3000/users/${id}`, existingData)
+        .put(`http://192.168.1.68:3001/users/${id}`, existingData)
         .then((res) => {
           Swal.fire({
             icon: "success",
@@ -118,7 +118,7 @@ export default function Todo() {
         setIsClick((prev) => !prev);
 
         axios
-          .put(`http://192.168.1.68:3000/users/${id}`, existingData)
+          .put(`http://192.168.1.68:3001/users/${id}`, existingData)
           .then((res) => {
             Swal.fire({
               icon: "success",

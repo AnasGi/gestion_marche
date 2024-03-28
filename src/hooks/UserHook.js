@@ -7,7 +7,7 @@ export default function UseData() {
 
     useEffect(()=>{
       const fetchData = async ()=>{
-        await axios.get('http://192.168.1.68:3000/users')
+        await axios.get('http://192.168.1.68:3001/users')
         .then(res=>setUser(res.data))
         .catch(err=>setUser('error'))
         setLoad(false)

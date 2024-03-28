@@ -48,7 +48,7 @@ export default function AddMarche() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-      .get(`http://192.168.1.68:3000/users//${id}`)
+      .get(`http://192.168.1.68:3001/users//${id}`)
       .then((res) => setExistingData(res.data));
     };
     fetchData();
@@ -90,7 +90,7 @@ export default function AddMarche() {
         responsable.marches.push({ ...MarcheInfo, num: MarcheInfo.num });
 
         axios
-          .put(`http://192.168.1.68:3000/users/${responsable.id}`, responsable)
+          .put(`http://192.168.1.68:3001/users/${responsable.id}`, responsable)
           .then((res) => {
             setErrorMsg("");
             Swal.fire({
@@ -103,7 +103,7 @@ export default function AddMarche() {
         ExistingData.marches.push({ ...MarcheInfo, num: MarcheInfo.num });
 
         axios
-          .put(`http://192.168.1.68:3000/users/${id}`, ExistingData)
+          .put(`http://192.168.1.68:3001/users/${id}`, ExistingData)
           .then((res) => {
             setErrorMsg("");
             Swal.fire({

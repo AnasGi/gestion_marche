@@ -24,7 +24,7 @@ export default function CarteMarche({ marches, id }) {
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://192.168.1.68:3000/users/${id}`)
+        .get(`http://192.168.1.68:3001/users/${id}`)
         .then((res) => setExistingData(res.data));
     };
     fetchData();
@@ -64,7 +64,7 @@ export default function CarteMarche({ marches, id }) {
     existingData.marches.splice(idx, 1, elemToUpdateOrder);
 
     axios
-      .put(`http://192.168.1.68:3000/users/${id}`, existingData)
+      .put(`http://192.168.1.68:3001/users/${id}`, existingData)
       .then((res) => console.log("order mod good"))
       .catch((res) => console.log("order mod bad"));
 
@@ -78,7 +78,7 @@ export default function CarteMarche({ marches, id }) {
     existingData.marches.splice(idx, 1);
 
     axios
-      .put(`http://192.168.1.68:3000/users/${id}`, existingData)
+      .put(`http://192.168.1.68:3001/users/${id}`, existingData)
       .then((res) => console.log("order mod good"))
       .catch((res) => console.log("order mod bad"));
 
@@ -140,7 +140,7 @@ export default function CarteMarche({ marches, id }) {
       existingData.marches.splice(idx, 1, getMarche);
 
       axios
-        .put(`http://192.168.1.68:3000/users/${id}`, existingData)
+        .put(`http://192.168.1.68:3001/users/${id}`, existingData)
         .then((res) => console.log("good"));
 
       window.location.reload();
