@@ -48,7 +48,7 @@ export default function AddMarche() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-      .get(`http://192.168.1.68:3001/users//${id}`)
+      .get(`http://192.168.1.68:3001/users/${id}`)
       .then((res) => setExistingData(res.data));
     };
     fetchData();
