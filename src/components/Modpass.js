@@ -53,7 +53,7 @@ export default function Modpass() {
     function ModifyPassword(e){
         e.preventDefault()
         if(newPass !== "" && indicatorClass() === 'moyen'){
-            axios.put(`http://localhost:3001/users/${id}` , {...user , password : newPass})
+            axios.put(`http://192.168.1.68:3000/users/${id}` , {...user , password : newPass})
             .then((res) => {
                 Swal.fire({
                   icon: "success",

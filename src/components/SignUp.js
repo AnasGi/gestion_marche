@@ -56,7 +56,7 @@ export default function SignUp() {
     else {
       setMsgError("");
       let user = { ...infos };
-      axios.post("http://localhost:3001/users", user).then((res) => {
+      axios.post(`http://192.168.1.68:3000/users`, user).then((res) => {
         Swal.fire({
           icon: "success",
           title: "Utilisateur ajouté avec succès",
